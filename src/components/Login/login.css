@@ -1,0 +1,23 @@
+
+.login-container {
+    width: 500px;
+    height: 500px;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+}
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#create-account {
+    cursor: pointer;
+    color: blue;
+
+}
+
+#create-account:hover {
+    transition: ease-in;
+    color:blueviolet;
+}

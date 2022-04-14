@@ -1,13 +1,257 @@
+
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Rubik', sans-serif;
+
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.heading {
+  height: 50px;
+  /* margin: 10px;
+  padding: 10px; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+}
+
+.add-field {
+  padding-bottom: 10px;
+}
+
+.App {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-evenly;
+  padding: 0px;
+  margin: 0px;
+}
+
+#app-container {
+  display: flex;
+  width: 80%;
+}
+
+#sign-in-btn {
+  margin: 20px
+}
+
+.sign-in-window {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.611);
+  display: flex;
+  justify-content: space-around;
+}
+.container {
+  /* display: flex; */
+  border: 2px solid steelblue;
+  /* margin-left: 30px;; */
+  /* max-width: 500px; */
+  min-height: 500px;
+  min-width: 40%;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.minimized {
+  color: blue;
+  max-width: 400px;
+  border: solid black 2px;
+  /* align-self:flex-start */
+}
+
+.edit-task-title {
+  width: 1000%;
+}
+
+.edit-task-btns {
+  font-size: 15px;
+  min-height: 60px;
+  border: none;
+  border-radius: 10px;
+  margin: 20px 0px 20px 10px;
+}
+@media(max-width:500px){
+  .edit-task-btns{
+    font-size: 12px;
+    margin-left: 0px;
+  }
+}
+
+.edit-goal-title {
+  width: 1000%;
+  margin-right: 2px;
+}
+@media(max-width:500px){
+  .edit-goal-title {
+    width: 40vw;
+  }
+}
+.edit-due-date{
+  width: 150px;
+}
+.goal-reorder {
+  padding: 0px;
+  margin: 0px;
+  font-size:30px;
+  margin-bottom: 7px;
+  border: none;
+  background-color:white;
+}
+
+.goal-reorder:active {
+  transform: scale(.95);
+}
+/* @media(min-width:500){
+  .goal-reorder{
+    font-size: 40px;
+  }
+} */
+.task-reorder {
+  padding: 0;
+  margin: 0;
+  font-size: 20px;
+  border: none;
+  background-color:white;
+}
+
+
+.small-btn {
+  background-color: white;
+  border: none;
+}
+.btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 5px;
+  font-family: inherit;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  margin: 20px 0px 10px 20px;
+  /* display: flex;
+  justify-self: center; */
+}
+
+.completed-btn {
+  margin-right:5px; 
+  background-color:yellow; 
+  border-radius: 5px;
+  border: 2px black solid;
+  font-weight: 600
+}
+.completed-btn:active {
+  transform: scale(.95);
+}
+
+.completed-reorder {
+  padding: 0px;
+  margin: 0px;
+  font-size:27px;
+  border: none;
+  background-color:transparent;
+}
+.completed-reorder:active {
+  transform: scale(.95);
+}
+
+.btn:active {
+  transform: scale(.95);
+}
+
+.task {
+  background: rgba(51, 170, 51, .1)
+
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 50px;
+  background: #f5f5f5;
+  padding-left: 10px;
+
+  /* padding-bottom: 0px; */
+  margin: 5px;
+}
+
+.done-true {
+  list-style-type: "✅";
+  cursor: pointer;
+  
+
+}
+.done-false {
+  list-style-type: "⬜";
+  cursor: pointer;
+  
+}
+
+#drop-down {
+  background-color: green;
+  color: white;
+}
+
+.flex {
+  display: flex;
+}
+
+.detail {
+  padding:1px;
+  margin: 0px;
+  cursor: pointer;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.non-clickable {
+  pointer-events: none;
+}
+
+.goal-form {
+  display: flex;
+  flex-direction: column;
+  align-items:stretch;
+  /* border: 4px solid black; */
+  min-width: 45%;
+
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  /* border: solid black 2px; */
+  align-items:center;
+
+}
+
+.plus-btn {
+  padding: 4px 8px;
+  /* background: black; */
+  margin-left: 4px;
+  border: black solid 1px;
+  border-radius: 5px;
+  font-family: inherit;
+  /* font-weight: bold; */
+  color: white;
+  font-size: 8px;
+  cursor: pointer;
+}
+
+.goal-form-container {
+  display: flex;
+  justify-content:space-around;
+  align-items: flex-start;
+
+}
+
+.hue-picker {
+  cursor: pointer;
+  width:initial;
 }
