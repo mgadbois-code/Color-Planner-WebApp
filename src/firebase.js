@@ -38,6 +38,9 @@ const signInWithGoogle = async () => {
                 email: user.email,
             })
         }
+        let goals = await getUserGoals()
+        let completed = await getUserCompleted()
+        return [goals,completed]
 
     }catch (err) {
         console.error(err)

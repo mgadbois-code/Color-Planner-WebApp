@@ -19,7 +19,7 @@ import { auth, changeGoalIdDB } from "./firebase";
 import { logout, addGoalDB, updateGoalDB, deleteGoalDB, addCompletedDB, updateCompletedDB, deleteCompletedDB, changeCompletedIdDB } from "./firebase";
 import { collection } from "firebase/firestore";
 
-function App({fetchGoals, updGoalsDB, updCompletedDB, fetchCompleted, showDialogBox}) {
+function App() {
 
   const [user, loading, error] = useAuthState(auth)
   
@@ -699,7 +699,11 @@ const toggleVisible = async (goalId) => {
           <LoginPage setShowLogin={setShowLogin} setGoals={setGoals} setCompleted={setCompleted} />   
       </div>}
       <div className="heading">
-        {user ? <button id='sign-in-btn' onClick={logout}>Sign Out</button> :
+        {!user && !showLogin && 
+        <div className="offline-warning" >
+          <h5 className="warning">⚠️You are not signed in.⚠️<p style={{fontSize:'15px'}}>Goals will not be saved!</p></h5>
+        </div>}
+        {user ? <button id='sign-in-btn' onClick={() => {logout(); setGoals([]); setCompleted([]) }}>Sign Out</button> :
         <button id='sign-in-btn' onClick={() => setShowLogin(true)}>Sign in</button>}
       </div>
     <div className="App">

@@ -6,13 +6,30 @@ body {
 }
 
 .heading {
-  height: 50px;
-  /* margin: 10px;
-  padding: 10px; */
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
 
+}
+
+.offline-warning {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 'empty warning' ;
+  height: 50px;
+
+  /* border: solid black; */
+}
+.offline-warning h5 {
+  border: solid black;
+
+  font-weight: bold;
+  font-family: 'Rubik', sans-serif;
+  background-color: rgba(255, 255, 0, 0.597);
+  margin: 5px;
+  border-radius: 10px;
+  text-align: center;
+  grid-column: 2;
+  /* grid-area: 'warning'; */
 }
 
 .add-field {
@@ -33,7 +50,10 @@ body {
 }
 
 #sign-in-btn {
-  margin: 20px
+  align-self: flex-end;
+  margin: 20px;
+  width: 80px;
+  grid-column: 3;
 }
 
 .sign-in-window {

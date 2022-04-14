@@ -31,11 +31,14 @@ const LoginPage = ({setShowLogin, setGoals, setCompleted}) => {
                 <input type="text" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 <label htmlFor="password">Password:</label>
                 <input type="text" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button onClick={async () => { setShowLogin(false);let [goals, completed] = await logInWithEmailAndPassword(email, password);
+                <button onClick={async () => { let [goals, completed] = await logInWithEmailAndPassword(email, password);setShowLogin(false);
                   goals.sort((a,b) => b.id - a.id);setGoals(goals);
                   completed.sort((a,b) => b.id - a.id); setCompleted(completed)}} >Sign in</button>
                 <p>or</p>
-                <button onClick={signInWithGoogle} >Sign in With Google</button>
+                <button onClick={async () => {let [goals, completed] = await signInWithGoogle()
+                setShowLogin(false)
+                goals.sort((a,b) => b.id - a.id);setGoals(goals);
+                completed.sort((a,b) => b.id - a.id); setCompleted(completed)}} >Sign in With Google</button>
                 <p id='create-account' onClick={() => setShowSignUp(true)}>Create an Account</p>
             </div>
         </div>
