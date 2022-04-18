@@ -21,3 +21,11 @@
     transition: ease-in;
     color:blueviolet;
 }
+.back-btn {
+    border: none;    
+    background: none;
+    font-size: 25px;
+}
+.back-btn:active {
+    transform: scale(0.8);
+}

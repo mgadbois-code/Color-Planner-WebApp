@@ -33,7 +33,6 @@ const signInWithGoogle = async () => {
         if(docs.docs.length == 0) {
             await addDoc(userCollectionRef, {
                 uid: user.uid,
-                name: user.displayName,
                 authProvider: 'google',
                 email: user.email,
             })
@@ -70,7 +69,6 @@ const registerWithEmailAndPassword = async(name, email, password) => {
         const user = res.user
         await addDoc(userCollectionRef, {
             uid: user.uid,
-            name,
             authProvider: 'local',
             email,
         })
@@ -145,7 +143,6 @@ const updateGoalDB = async (newGoal) => {
     const goalSnap = await getDocs(gq)
     var goalDocId = goalSnap.docs[0].id
     await setDoc(doc(goalsRef, goalDocId),newGoal)
-    console.log(newGoal)
 }catch(err){
     console.error(err)
 }
@@ -159,7 +156,6 @@ const changeGoalIdDB = async (newGoal, newId) => {
     var goalDocId = goalSnap.docs[0].id
     newGoal.id = newId
     await setDoc(doc(goalsRef, goalDocId),newGoal)
-    console.log(newGoal)
 }catch(err){
     console.error(err)
 }
@@ -172,7 +168,6 @@ const updateCompletedDB = async (newGoal) => {
     const completedSnap = await getDocs(cq)
     var completedDocId = completedSnap.docs[0].id
     await setDoc(doc(completedRef, completedDocId),newGoal)
-    console.log(newGoal)
 }catch(err){
     console.error(err)
 }
@@ -186,7 +181,6 @@ const changeCompletedIdDB = async (newGoal,newId) => {
     var completedDocId = completedSnap.docs[0].id
     newGoal.id = newId
     await setDoc(doc(completedRef, completedDocId),newGoal)
-    console.log(newGoal)
 }catch(err){
     console.error(err)
 }

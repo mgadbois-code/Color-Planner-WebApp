@@ -173,9 +173,7 @@ const toggleEditGoal = async (id) => {
 const removeGoal = async (goalId, done) => {
  
     var removedGoal
-    // NEED TO UNDERSTAND ASYNC AWAIT
-    await deleteGoalDB({id:goalId})
-
+   
     let newGoals = goals.filter((goal) => {
       if(goal.id != goalId){
       return true
@@ -185,12 +183,22 @@ const removeGoal = async (goalId, done) => {
       return false
   }})
 
+  let newGoalsDB = {...newGoals}
   for(let i= 0; i< newGoals.length; i++ ){
-    await changeGoalIdDB(newGoals[i], newGoals.length-i)
+    
     newGoals[i].id = newGoals.length-i;
   }
-  console.log(newGoals)
   setGoals(newGoals)
+  if(user){
+    await deleteGoalDB({id:goalId})
+  
+    for(let i= 0; i< newGoalsDB.length; i++ ){
+   
+      await changeGoalIdDB(newGoalsDB[i], newGoalsDB.length-i)
+    
+    }
+  }
+
   if(done){
     removedGoal.id = completed.length + 1
     removedGoal.showSubGoals = false;
@@ -206,7 +214,10 @@ const removeGoal = async (goalId, done) => {
 }
 
 const removeCompleted = async (goalId) => {
-  await deleteCompletedDB({id: goalId})
+
+  if(user){
+    await deleteCompletedDB({id: goalId})
+  }
 
   let newCompleted =   completed.filter( (goal) => goal.id != goalId)
     for(let i = 0; i< newCompleted.length; i++){
@@ -336,7 +347,9 @@ let newGoals = goals.map((goal) => {
 })
 
 setGoals(newGoals)
-await updateGoalDB(updGoal)
+if(user){
+  await updateGoalDB(updGoal)
+}
 // await updGoalsDB(newGoals)
 
  
@@ -408,16 +421,18 @@ const addGoal = async(goal) => {
   goal.id = goals.length + 1
   let newGoals =  [goal,...goals]
   setGoals(newGoals)
-  await addGoalDB(goal);
+  if(user){
+    await addGoalDB(goal);
+  }
   // await updGoalsDB(newGoals)
 
 }
 
-const createNewGoal = () => {
+const createNewGoal =  async() => {
   let randomHue = (Math.floor(Math.random()*3600)/10).toString() 
   let randomColor = `hsl(${randomHue},100%,80%)`
   let newGoal = {title:"New Goal",dueDate:"",showEditGoal:true, showSubGoals:false,color:randomColor,tasks:[], visible:true }
-  addGoal(newGoal);
+  await addGoal(newGoal);
   
 }
 

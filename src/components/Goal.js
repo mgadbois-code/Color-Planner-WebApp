@@ -13,12 +13,11 @@ const Goal = (props) => {
     //order Tasks by whether they are done
     var doneTasks = props.goal.tasks.filter((task) => task.done)
     var undoneTasks = props.goal.tasks.filter((task) => !task.done)
-    var tasks=doneTasks.concat(undoneTasks)
+    
     var done = undoneTasks.length == 0
-    var allToday = undoneTasks.filter((task)=> task.today).length != 0;
-    const [allTodayStatus, setAllTodayStatus] = useState(!allToday);
+    // console.log(`From goal.js from ${props.goal.title}: undone tasks are ${undoneTasks} `)
     
-    
+    const [allTodayStatus, setAllTodayStatus] = useState(undoneTasks.filter(task => task.today).length > 0);
     
     
     if(props.showEditGoal){
@@ -39,7 +38,7 @@ const Goal = (props) => {
                 </h3>
 
                 <div className="header">
-                    {props.goal.visible && <AllTodayButton goalId={props.goal.id} toggleAllToday={props.toggleAllToday} status={allTodayStatus} tasks={props.goal.tasks} setAllTodayStatus={setAllTodayStatus} />}
+                    {props.goal.visible && <AllTodayButton goalId={props.goal.id} toggleAllToday={props.toggleAllToday} status={!undoneTasks.filter(task => task.today).length > 0} tasks={props.goal.tasks} setAllTodayStatus={setAllTodayStatus} />}
                     {props.goal.visible && <EditButton toggleShowEditGoal={props.toggleShowEditGoal} goalId = {props.goal.id} />}
                     <FocusButton toggleVisible={props.toggleVisible} goalId={props.goal.id} visible={props.goal.visible} />
                     {<ItemRemovebutton allDone={undoneTasks.length} removeGoal={() => props.removeGoal(props.goal.id,done)}/>}
@@ -50,7 +49,7 @@ const Goal = (props) => {
             {props.goal.dueDate !=="" && <h6 onClick={() => props.onToggle(props.goal.id)} className="detail">Due: {props.goal.dueDate} </h6>}
 
             <div className="flex" style={{overflow:"auto"}}>
-                {!props.goal.showSubGoals && tasks.map((task) =>{
+                {!props.goal.showSubGoals && props.goal.tasks.map((task) =>{
                     if(task.done){
                         return <p className="flex" >✅</p>
                     }
@@ -58,7 +57,7 @@ const Goal = (props) => {
                 })}
             </div>
 
-            {props.goal.showSubGoals && <SubGoal goal={props.goal} toggleDone={props.toggleDone} setAllTodayStatus={setAllTodayStatus} toggleToday={props.toggleToday} tasks={tasks}/>}
+            {props.goal.showSubGoals && <SubGoal goal={props.goal} toggleDone={props.toggleDone} setAllTodayStatus={setAllTodayStatus} toggleToday={props.toggleToday} tasks={props.goal.tasks}/>}
 
         </div>
     )

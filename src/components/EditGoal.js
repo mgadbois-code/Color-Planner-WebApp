@@ -42,7 +42,7 @@ const EditGoal = ({submitGoalEdits,toggleShowEditGoal,reOrderTaskUp,reOrderTaskD
             showDialogBox("Enter a task name")
             return
         }
-        let newTaskObj = {id:goal.tasks.length + 1, title: taskTitle, done:false}
+        let newTaskObj = {id:goal.tasks.length + 1, title: taskTitle, done:false, today:false}
         goal.tasks = [...goal.tasks,newTaskObj]
         setNewTask("")
         // goal.tasks = taskArr;

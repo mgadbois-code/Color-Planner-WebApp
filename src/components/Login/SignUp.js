@@ -5,8 +5,9 @@ import {
   registerWithEmailAndPassword,
   signInWithGoogle,
 } from "../../firebase";
+import './login.css'
 
-const SignUp = ({setShowLogin}) => {
+const SignUp = ({setShowLogin, setShowSignUp}) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
@@ -15,10 +16,9 @@ const SignUp = ({setShowLogin}) => {
   return (
     <div>
          <div >
+           <button className='back-btn' onClick={() => setShowSignUp(false)}>🔙</button>
             <h1>Sign Up</h1>
             <div className="login-form">
-                <label htmlFor="name">Name:</label>
-                <input type="text" value={name} onChange={(e)=> setName(e.target.value)} id="name" />
                 <label htmlFor="email">Email:</label>
                 <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} id="email" />
                 <label htmlFor="password">Password:</label>

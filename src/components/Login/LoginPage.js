@@ -23,7 +23,7 @@ const LoginPage = ({setShowLogin, setGoals, setCompleted}) => {
   return (
     <div className="login-container" onClick={(event) => event.stopPropagation()}>
             {showSignUp ?
-            <SignUp setShowLogin={setShowLogin} /> :
+            <SignUp setShowLogin={setShowLogin} setShowSignUp={setShowSignUp} /> :
         <div >
             <h1>Sign In</h1>
             <div className="login-form">
