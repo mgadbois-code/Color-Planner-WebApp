@@ -543,7 +543,15 @@ const reOrderGoalUp = async (goalId) => {
   for(let i = 0; i< goalsArr.length; i++){
     if(goalsArr[i].id == goalId){
         switchIndex = i-1;
-        if(i == 0){
+        while( switchIndex > 0){
+          if(!goalsArr[switchIndex].visible){
+            switchIndex -= 1
+          }
+          else{
+            break
+          }
+        }
+        if(switchIndex < 0){
             switchIndex = goalsArr.length -1
         }
         let tempGoal = goalsArr[switchIndex]
@@ -573,7 +581,15 @@ const reOrderGoalDown = async (goalId) => {
   for(let i = 0; i< goalsArr.length; i++){
     if(goalsArr[i].id == goalId){
         let switchIndex = i+1
-        if(i == goalsArr.length -1){
+        while( switchIndex < goalsArr.length){
+          if(!goalsArr[switchIndex].visible){
+            switchIndex += 1
+          }
+          else{
+            break
+          }
+        }
+        if(switchIndex >= goalsArr.length){
             switchIndex = 0
         }
         let tempGoal = goalsArr[switchIndex]
