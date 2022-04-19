@@ -13,17 +13,18 @@ import MinMaxButtons from "./components/MinMaxButtons";
 import CompletedList from "./components/CompletedList";
 import HiddenList from "./components/HiddenList";
 
-import { useAuthState, onAuthStateChange } from "react-firebase-hooks/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, changeGoalIdDB } from "./firebase";
 
-import { logout, addGoalDB, updateGoalDB, deleteGoalDB, addCompletedDB, updateCompletedDB, deleteCompletedDB, changeCompletedIdDB } from "./firebase";
+import { logout, addGoalDB, updateGoalDB, deleteGoalDB, addCompletedDB, updateCompletedDB, deleteCompletedDB, changeCompletedIdDB, getUserGoals, getUserCompleted } from "./firebase";
 import { collection } from "firebase/firestore";
 
 function App() {
 
   const [user, loading, error] = useAuthState(auth)
+  const [loaded, setLoaded] = useState(false)
   
-  const [showLogin, setShowLogin] = useState(true)
+  const [showLogin, setShowLogin] = useState(false)
   const [showAddGoal, setShowAddGoal] = useState(false)
   const [showAddTask, setShowAddTask] = useState(false)
   const [showCompleted, setShowCompleted] = useState(false)
@@ -41,25 +42,51 @@ function App() {
   const numericDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
 
 
+ 
 //loads goals from db
-  useEffect(() => {
-    const getGoals = async () => {
-      // var goalsFromFile = await fetchGoals();
 
-      // let g = await JSON.parse(goalsFromFile).goals
-      // setGoals([])
-    }
-    const getCompleted = async () => {
-      // var completedFromFile = await fetchCompleted();
-      // let c = await JSON.parse(completedFromFile).completed
-      setCompleted([])
-    }
-    // getGoals()
-    getCompleted()
-    
+const getGoals = async () => {
+  let goals = await getUserGoals()
+  setGoals(goals)
+  // var goalsFromFile = await fetchGoals();
 
-  }, [])
+  // let g = await JSON.parse(goalsFromFile).goals
+  // setGoals([])
+}
+const getCompleted = async () => {
+  let completed = await getUserCompleted()
+  setCompleted(completed)
+  // var completedFromFile = await fetchCompleted();
+  // let c = await JSON.parse(completedFromFile).completed
+}
+// getGoals()
+
+// Get Goals when first loaded and logged in
+if(!loaded){
+  if(loading){
+    setTimeout(() => {
+      if(user){
+          getGoals()
+      }
+      if(user){
+        getCompleted()
+      }
+    }, 1000)
+  }
+  else{
+    if(user){
+        getGoals()
+    }
+    if(user){
+      getCompleted()
+    }
+  }
+  setLoaded(true)
+
+}
+
 //
+
 
 
   useEffect(() => {
@@ -718,7 +745,7 @@ const toggleVisible = async (goalId) => {
         <div className="offline-warning" >
           <h5 className="warning">⚠️You are not signed in.⚠️<p style={{fontSize:'15px'}}>Goals will not be saved!</p></h5>
         </div>}
-        {user ? <button id='sign-in-btn' onClick={() => {logout(); setGoals([]); setCompleted([]) }}>Sign Out</button> :
+        {user ? <button id='sign-in-btn' onClick={() => {logout(); setGoals([]); setCompleted([]); setShowLogin(true) }}>Sign Out</button> :
         <button id='sign-in-btn' onClick={() => setShowLogin(true)}>Sign in</button>}
       </div>
     <div className="App">

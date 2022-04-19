@@ -72,9 +72,11 @@ const registerWithEmailAndPassword = async(name, email, password) => {
             authProvider: 'local',
             email,
         })
+        return true
     } catch (err) {
         console.error(err)
         alert(err.message)
+        return false
     }
 }
 
@@ -218,5 +220,7 @@ export {
     addCompletedDB,
     updateCompletedDB,
     deleteCompletedDB,
-    changeCompletedIdDB
+    changeCompletedIdDB,
+    getUserGoals,
+    getUserCompleted
   }

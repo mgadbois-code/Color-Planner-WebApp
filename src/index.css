@@ -54,6 +54,14 @@ body {
   margin: 20px;
   width: 80px;
   grid-column: 3;
+
+  background: steelblue;
+  font-weight: bold;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  padding: 5px;
+  width: 100px
 }
 
 .sign-in-window {
@@ -64,6 +72,15 @@ body {
   background: rgba(0, 0, 0, 0.611);
   display: flex;
   justify-content: space-around;
+}
+
+.sign-in-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sign-in-header img {
+  object-fit: cover;
 }
 .container {
   /* display: flex; */
@@ -249,6 +266,14 @@ body {
   /* border: solid black 2px; */
   align-items:center;
 
+}
+
+.min-max-btn {
+  border:solid 2px black;
+  color: black;
+  font-weight: bold;
+  border-radius: 20%;
+  width: 30px;
 }
 
 .plus-btn {

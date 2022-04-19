@@ -1,5 +1,6 @@
 
 .login-container {
+    margin-top: 20px;
     width: 500px;
     height: 500px;
     background: white;
@@ -21,6 +22,41 @@
     transition: ease-in;
     color:blueviolet;
 }
+
+.sign-in-container{
+    display: flex;
+    justify-content: space-around;
+}
+.sign-in-container p{
+    align-self: flex-end;
+    justify-self: end;
+    font-weight: bold;
+    /* border: solid black; */
+}
+.sign-in-btn-a {
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    background: green;
+    border:none;
+    border-radius: 10px;
+    padding: 10px 25px;
+    width: 200px;
+    
+}
+
+.google-sign-in-btn {
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    background: #4285F4;
+    border:none;
+    border-radius: 10px;
+    width: 200px;
+    
+}
 .back-btn {
     border: none;    
     background: none;
@@ -28,4 +64,36 @@
 }
 .back-btn:active {
     transform: scale(0.8);
+}
+
+.sign-up-error {
+    padding: 0px;
+    margin: 0px;
+    font-size: small;
+    color: red;
+}
+.create-account-btn-a {
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    background: green;
+    border:none;
+    border-radius: 10px;
+    padding: 10px 25px;
+}
+.create-account-btn-b {
+    cursor: default;
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    background: gray;
+    border:none;
+    border-radius: 10px;
+    padding: 10px 25px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-around;
 }

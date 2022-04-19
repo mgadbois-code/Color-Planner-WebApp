@@ -4,9 +4,9 @@ const MinMaxButtons = ({toggleMiniTasks, toggleMiniGoals,miniGoals, miniTasks,co
     return (
         <div style={{display:"flex", flexDirection:"row-reverse"}}>
 
-           {((component == "Goals" || miniGoals) && !miniTasks) && <button onClick ={toggleMiniGoals}>{component == "Tasks" ? "G" : "-"}</button>}
+           {((component == "Goals" || miniGoals) && !miniTasks) && <button className="min-max-btn" onClick ={toggleMiniGoals}>{component == "Tasks" ? "G" : "-"}</button>}
 
-            {((component == "Tasks" || miniTasks) && !miniGoals) && <button onClick={toggleMiniTasks}>{component=="Goals" ?  "T" : "-"}</button>}
+            {((component == "Tasks" || miniTasks) && !miniGoals) && <button className="min-max-btn" onClick={toggleMiniTasks}>{component=="Goals" ?  "T" : "-"}</button>}
         </div>
         )
 }

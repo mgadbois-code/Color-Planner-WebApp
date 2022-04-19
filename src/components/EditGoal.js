@@ -117,10 +117,12 @@ const EditGoal = ({submitGoalEdits,toggleShowEditGoal,reOrderTaskUp,reOrderTaskD
                     </div>
                     )}
                     <div className="flex" style={{marginTop: "7px"}}>
-                        <label style={{fontWeight:"bold", fontSize:"12px", backgroundColor:"white",padding:"12px 2px 2px"}} for="New Task">Add Task: </label>
-                        <input style={{margin:"5px 7px 2px 0px"}}  name="New Task" className="p" value={newTask} placeholder="New Task" onChange={(event) => {setNewTask(event.target.value)}} onKeyPress={handleKeyPress} />
-                        <button style = {{backgroundColor:"green", color:"white",fontSize:"20px",fontWeight:"bold",margin:"5px 0px 5px 0px", padding:"0px 5px 0px 5px"}}
-                         onClick ={(event) => {addTask(newTask); submitGoalEdits(goalId,goal)}} className="plus-btn"> + </button>
+                        <div>
+                            <label style={{fontWeight:"bold", fontSize:"12px", backgroundColor:"white",padding:"12px 2px 2px"}} for="New Task">Add Task: </label>
+                            <input style={{margin:"5px 7px 2px 0px"}}  name="New Task" className="p" value={newTask} placeholder="New Task" onChange={(event) => {setNewTask(event.target.value)}} onKeyPress={handleKeyPress} />
+                            <button style = {{backgroundColor:"green", color:"white",fontSize:"20px",fontWeight:"bold",margin:"5px 0px 5px 0px", padding:"0px 5px 0px 5px"}}
+                            onClick ={(event) => {addTask(newTask); submitGoalEdits(goalId,goal)}} className="plus-btn"> + </button>
+                         </div>
                     </div>
                 </div>
             </div>

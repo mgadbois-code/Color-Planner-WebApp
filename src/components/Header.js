@@ -12,7 +12,7 @@ const Header = (props) => {
             }
            {props.title==="Tasks" &&
            <DropdownButton onSelect={props.onAdd} id="drop-down" title="Add">
-          {props.goals.length > 0 && props.goals.map(goal => <Dropdown.Item  eventKey={goal.id} >{goal.title}</Dropdown.Item>)}
+          {props.goals.length > 0 && props.goals.filter(goal => goal.visible).map(goal => <Dropdown.Item  eventKey={goal.id} >{goal.title}</Dropdown.Item>)}
           {props.goals.length > 0 && <Dropdown.Divider />}
           <Dropdown.Item eventKey="newGoal">New Goal</Dropdown.Item>
          </DropdownButton>}
