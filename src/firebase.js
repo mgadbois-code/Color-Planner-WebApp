@@ -24,6 +24,7 @@ var completedRef
 
 const googleProvider = new GoogleAuthProvider();
 
+
 const signInWithGoogle = async () => {
     try {
         const res = await signInWithPopup(auth, googleProvider)
@@ -84,9 +85,11 @@ const sendPasswordReset = async (email) => {
     try {
         await sendPasswordResetEmail(auth, email)
         alert("Password reset link sent!")
+        return true
     }catch (err) {
         console.error(err)
         alert(err.message)
+        return false
     }
 }
 

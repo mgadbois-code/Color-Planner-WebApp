@@ -24,7 +24,7 @@ function App() {
   const [user, loading, error] = useAuthState(auth)
   const [loaded, setLoaded] = useState(false)
   
-  const [showLogin, setShowLogin] = useState(false)
+  const [showLogin, setShowLogin] = useState(true)
   const [showAddGoal, setShowAddGoal] = useState(false)
   const [showAddTask, setShowAddTask] = useState(false)
   const [showCompleted, setShowCompleted] = useState(false)
@@ -62,28 +62,7 @@ const getCompleted = async () => {
 // getGoals()
 
 // Get Goals when first loaded and logged in
-if(!loaded){
-  if(loading){
-    setTimeout(() => {
-      if(user){
-          getGoals()
-      }
-      if(user){
-        getCompleted()
-      }
-    }, 1000)
-  }
-  else{
-    if(user){
-        getGoals()
-    }
-    if(user){
-      getCompleted()
-    }
-  }
-  setLoaded(true)
 
-}
 
 //
 

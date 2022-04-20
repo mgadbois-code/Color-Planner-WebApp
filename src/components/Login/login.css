@@ -13,6 +13,8 @@
 }
 
 #create-account {
+    text-decoration: underline;
+    font-weight: bold;
     cursor: pointer;
     color: blue;
 
@@ -22,10 +24,21 @@
     transition: ease-in;
     color:blueviolet;
 }
+#forgot-password {
+    cursor: pointer;
+    color: blue;
+
+}
+
+#forgot-password:hover {
+    transition: ease-in;
+    color:blueviolet;
+}
 
 .sign-in-container{
     display: flex;
     justify-content: space-around;
+    margin-bottom: 10px;
 }
 .sign-in-container p{
     align-self: flex-end;
@@ -39,6 +52,18 @@
     font-weight: bold;
     margin-top: 10px;
     background: green;
+    border:none;
+    border-radius: 10px;
+    padding: 10px 25px;
+    width: 200px;
+    
+}
+.send-reset-btn {
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    background: darkorange;
     border:none;
     border-radius: 10px;
     padding: 10px 25px;
@@ -83,7 +108,7 @@
     padding: 10px 25px;
 }
 .create-account-btn-b {
-    cursor: default;
+    cursor: not-allowed;
     color: white;
     font-weight: bold;
     margin-top: 10px;
