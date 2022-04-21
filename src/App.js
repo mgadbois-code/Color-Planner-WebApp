@@ -189,21 +189,19 @@ const removeGoal = async (goalId, done) => {
       return false
   }})
 
-  let newGoalsDB = {...newGoals}
-  for(let i= 0; i< newGoals.length; i++ ){
+  if(user){
+    await deleteGoalDB({id:goalId})
+
+  }
+  for(let i= removedGoal.id - 1; i< newGoals.length; i++ ){
     
+    if(user){
+        await changeGoalIdDB(newGoals[i], newGoals.length-i)
+      
+    }
     newGoals[i].id = newGoals.length-i;
   }
   setGoals(newGoals)
-  if(user){
-    await deleteGoalDB({id:goalId})
-  
-    for(let i= 0; i< newGoalsDB.length; i++ ){
-   
-      await changeGoalIdDB(newGoalsDB[i], newGoalsDB.length-i)
-    
-    }
-  }
 
   if(done){
     removedGoal.id = completed.length + 1

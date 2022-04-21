@@ -33,7 +33,7 @@ useEffect( () => {
     <div>
          <div >
            <button className='back-btn' onClick={() => setShowSignUp(false)}>🔙</button>
-            <h1>Sign Up</h1>
+            <h1>Create An Account</h1>
             <div className="login-form">
                 <label htmlFor="email">Email:</label>
                 <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} id="email" />
