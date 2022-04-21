@@ -193,7 +193,7 @@ const removeGoal = async (goalId, done) => {
     await deleteGoalDB({id:goalId})
 
   }
-  for(let i= removedGoal.id - 1; i< newGoals.length; i++ ){
+  for(let i= goalId - 1; i< newGoals.length; i++ ){
     
     if(user){
         await changeGoalIdDB(newGoals[i], newGoals.length-i)
@@ -224,8 +224,10 @@ const removeCompleted = async (goalId) => {
   }
 
   let newCompleted =   completed.filter( (goal) => goal.id != goalId)
-    for(let i = 0; i< newCompleted.length; i++){
-      await changeCompletedIdDB(newCompleted[i], newCompleted.length - i)
+    for(let i = goalId - 1; i< newCompleted.length; i++){
+      if(user){
+        await changeCompletedIdDB(newCompleted[i], newCompleted.length - i)
+      }
       newCompleted[i].id = newCompleted.length - i
     }
   setCompleted(newCompleted)

@@ -1,6 +1,7 @@
 import { ErrorFactory } from '@firebase/util';
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from "react-firebase-hooks/auth";
+import logo from '../../Color-Planner_Icon.png'
 import {
   auth,
   registerWithEmailAndPassword,
@@ -33,7 +34,10 @@ useEffect( () => {
     <div>
          <div >
            <button className='back-btn' onClick={() => setShowSignUp(false)}>🔙</button>
-            <h1>Create An Account</h1>
+           <div className="sign-in-header">
+              <h1>Create An Account</h1>
+              <img src={logo} alt="" />
+            </div>
             <div className="login-form">
                 <label htmlFor="email">Email:</label>
                 <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} id="email" />
