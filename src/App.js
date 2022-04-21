@@ -97,7 +97,6 @@ const getCompleted = async () => {
   })
 
 const toggleMiniTasks = () => {
-  console.log("toggleMiniTasks")
   if(windowWidth < 645){
     if(minimizeTasks){
       setMinimizeTasks(false)
@@ -114,7 +113,6 @@ const toggleMiniTasks = () => {
 }
 
 const toggleMiniGoals = () => {
-  console.log("toggleMiniGoals")
   if(windowWidth < 645){
     if(minimizeGoals){
       setMinimizeGoals(false)
@@ -158,7 +156,6 @@ const toggleSubCompleted = (id) => {
 
 const toggleEditGoal = async (id) => {
   var updGoal
-  console.log("goal id: " + id)
   setGoals(goals.map((goal) => {
     if( goal.id == id){
       let showEditGoalValue = true
@@ -168,7 +165,6 @@ const toggleEditGoal = async (id) => {
       updGoal = {...goal,showEditGoal: showEditGoalValue}
       goal = updGoal
     }
-    console.log(goal.showEditGoal)
     return goal
   }))
 
@@ -191,15 +187,14 @@ const removeGoal = async (goalId, done) => {
 
   if(user){
     await deleteGoalDB({id:goalId})
-
   }
-  for(let i= goalId - 1; i< newGoals.length; i++ ){
+
+  for(let i= 0; i< newGoals.length; i++ ){
     
     if(user){
-        await changeGoalIdDB(newGoals[i], newGoals.length-i)
-      
+        await changeGoalIdDB(newGoals[i], newGoals.length - i)
     }
-    newGoals[i].id = newGoals.length-i;
+    newGoals[i].id = newGoals.length - i;
   }
   setGoals(newGoals)
 
@@ -224,7 +219,7 @@ const removeCompleted = async (goalId) => {
   }
 
   let newCompleted =   completed.filter( (goal) => goal.id != goalId)
-    for(let i = goalId - 1; i< newCompleted.length; i++){
+    for(let i = 0; i< newCompleted.length; i++){
       if(user){
         await changeCompletedIdDB(newCompleted[i], newCompleted.length - i)
       }
@@ -366,7 +361,7 @@ if(user){
 
 const submitGoalEdits = async(goalId,newGoal) =>{
   if(newGoal.tasks.length == 0){
-    removeGoal(goalId, false)
+    await removeGoal(goalId, false)
     return
   }
   

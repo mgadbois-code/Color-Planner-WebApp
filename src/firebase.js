@@ -155,10 +155,8 @@ const updateGoalDB = async (newGoal) => {
 }
 const changeGoalIdDB = async (newGoal, newId) => {
     try{
-    console.log(newGoal)
     const gq = query(goalsRef, where('id', '==', newGoal.id))
     const goalSnap = await getDocs(gq)
-    console.log(goalSnap.docs)
     var goalDocId = goalSnap.docs[0].id
     newGoal.id = newId
     await setDoc(doc(goalsRef, goalDocId),newGoal)
