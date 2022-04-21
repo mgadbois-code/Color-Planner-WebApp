@@ -7,6 +7,14 @@
     padding: 20px;
     border-radius: 20px;
 }
+
+@media screen and (max-width: 920px){
+    .login-container{
+        width: 90%
+    }
+}
+
+
 .login-form {
     display: flex;
     flex-direction: column;
@@ -55,7 +63,7 @@
     border:none;
     border-radius: 10px;
     padding: 10px 25px;
-    width: 200px;
+    width: 40%;
     
 }
 .send-reset-btn {
@@ -79,7 +87,7 @@
     background: #4285F4;
     border:none;
     border-radius: 10px;
-    width: 200px;
+    width: 40%;
     
 }
 .back-btn {

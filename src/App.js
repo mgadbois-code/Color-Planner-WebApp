@@ -30,7 +30,7 @@ function App() {
   const [showCompleted, setShowCompleted] = useState(false)
   const [showHiddenList, setShowHiddenList] = useState(false)
   const [addToGoal, setAddToGoal] = useState("")
-  const [minimizeTasks, setMinimizeTasks] = useState(false)
+  const [minimizeTasks, setMinimizeTasks] = useState(true)
   const [minimizeGoals, setMinimizeGoals] = useState(false)
   const [holdingGoalMinimize, setHoldingGoalMinimize] =useState(false);
   const [completed, setCompleted] = useState([ ])
@@ -738,7 +738,7 @@ const toggleVisible = async (goalId) => {
       <div className="heading">
         {!user && !showLogin && 
         <div className="offline-warning" >
-          <h5 className="warning">⚠️You are not signed in.⚠️<p style={{fontSize:'15px'}}>Goals will not be saved!</p></h5>
+          <h5 className="warning">⚠️You are not signed in.⚠️<p>Goals will not be saved!</p></h5>
         </div>}
         {user ? <button id='sign-in-btn' onClick={() => {logout(); setGoals([]); setCompleted([]); setShowLogin(true) }}>Sign Out</button> :
         <button id='sign-in-btn' onClick={() => setShowLogin(true)}>Sign in</button>}

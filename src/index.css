@@ -32,6 +32,24 @@ body {
   /* grid-area: 'warning'; */
 }
 
+.offline-warning h5 p {
+  font-size: 15PX;
+}
+@media screen and (max-width: 920px) {
+  .offline-warning {
+    display: flex;
+    width: 300px;
+    align-self: center;
+    margin-left: 20% ;
+  }
+  .offline-warning h5 {
+    font-size: 15px;
+  }
+  .offline-warning h5 p {
+    font-size: 10px;
+  }
+}
+
 .add-field {
   padding-bottom: 10px;
 }
@@ -47,6 +65,12 @@ body {
 #app-container {
   display: flex;
   width: 80%;
+}
+
+@media screen and (max-width: 920px) {
+  #app-container {
+    width: 100%;
+  }
 }
 
 #sign-in-btn {
