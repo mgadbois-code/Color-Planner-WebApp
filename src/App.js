@@ -72,11 +72,11 @@ const getCompleted = async () => {
     function handleResize() {
       // console.log('resized to: ', window.innerWidth, 'x', window.innerHeight)
       setWindowWidth(window.innerWidth)
-      if( windowWidth < 645 && (!minimizeTasks && !minimizeGoals)){
+      if( windowWidth < 920 && (!minimizeTasks && !minimizeGoals)){
         setMinimizeGoals(true)
         setHoldingGoalMinimize(true)
       }
-      else if(windowWidth >= 645 && holdingGoalMinimize){
+      else if(windowWidth >= 920 && holdingGoalMinimize){
         setMinimizeGoals(false);
         setMinimizeTasks(false);
         setHoldingGoalMinimize(false)
@@ -97,7 +97,7 @@ const getCompleted = async () => {
   })
 
 const toggleMiniTasks = () => {
-  if(windowWidth < 645){
+  if(windowWidth < 920){
     if(minimizeTasks){
       setMinimizeTasks(false)
       setMinimizeGoals(true)
@@ -113,7 +113,7 @@ const toggleMiniTasks = () => {
 }
 
 const toggleMiniGoals = () => {
-  if(windowWidth < 645){
+  if(windowWidth < 920){
     if(minimizeGoals){
       setMinimizeGoals(false)
       setMinimizeTasks(true)

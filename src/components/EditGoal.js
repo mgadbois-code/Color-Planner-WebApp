@@ -99,7 +99,7 @@ const EditGoal = ({submitGoalEdits,toggleShowEditGoal,reOrderTaskUp,reOrderTaskD
                 </div>
     
                     <button onClick={() => {goal.showEditGoal=false;
-                        submitGoalEdits(goalId,goal)}} className="btn" style={{backgroundColor:goal.color, marginRight:"20px", color:"black", fontWeight:"bold"}}>{goal.tasks.length == 0 ? "Remove" : "Done"}</button>
+                        submitGoalEdits(goalId,goal)}} className="edit-done-btn" style={{backgroundColor:goal.color}}>{goal.tasks.length == 0 ? "Remove" : "Done"}</button>
  
             </div>
           
