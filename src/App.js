@@ -444,7 +444,7 @@ const reOrderTaskUp = async (goalId,taskId, taskArr, onTaskList = false) =>{
         if(onTaskList){
           // Find Task with smaller index with today == true and set switchIndex
           while(switchIndex > 0){
-            if(!taskArr[switchIndex].today && !taskArr[switchIndex.done]){
+            if(!taskArr[switchIndex].today || taskArr[switchIndex].done){
               switchIndex--
             }
             else{
@@ -481,7 +481,7 @@ const reOrderTaskDown = async (goalId,taskId, taskArr, onTaskList=false) =>{
           if(onTaskList){
             // Find Task with smaller index with today == true and set switchIndex
             while(switchIndex < taskArr.length - 1){
-              if(!taskArr[switchIndex].today && !taskArr[switchIndex.done]){
+              if(!taskArr[switchIndex].today || taskArr[switchIndex].done){
                 switchIndex++
               }
               else{

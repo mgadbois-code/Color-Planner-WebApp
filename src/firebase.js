@@ -44,6 +44,7 @@ const signInWithGoogle = async () => {
 
     }catch (err) {
         console.error(err)
+        alert(err.message)
     }
 }
 
@@ -94,49 +95,79 @@ const sendPasswordReset = async (email) => {
 }
 
 const logout = () => {
-    signOut(auth)
+    try{
+        signOut(auth)
+    }
+    catch (err) {
+        console.error(err)
+        alert(err.message)
+    }
 }
 
 // database interaction
 
 const getUserGoals = async () => {
-    const q = query(userCollectionRef, where('uid','==', auth.currentUser.uid))
-    const snapshot = await getDocs(q)
-    currUserDocRef = snapshot.docs[0].ref
-    goalsRef = collection(currUserDocRef, 'goals')
-    const gq = query(goalsRef, where('id', '!=', '-1'))
-    const goalSnap = await getDocs(gq)
-    var goalsArr = []
-    goalSnap.forEach((doc) => {
-        goalsArr.push(doc.data())
-    })
-    // console.log(goalsArr)
-    return goalsArr
+    try{
+
+        const q = query(userCollectionRef, where('uid','==', auth.currentUser.uid))
+        const snapshot = await getDocs(q)
+        currUserDocRef = snapshot.docs[0].ref
+        goalsRef = collection(currUserDocRef, 'goals')
+        const gq = query(goalsRef, where('id', '!=', '-1'))
+        const goalSnap = await getDocs(gq)
+        var goalsArr = []
+        goalSnap.forEach((doc) => {
+            goalsArr.push(doc.data())
+        })
+        // console.log(goalsArr)
+        return goalsArr
+        
+    }catch (err) {
+        console.error(err)
+        alert(err.message)
+    }
     
 
 }
 
 const getUserCompleted = async () => {
-    const q = query(userCollectionRef, where('uid','==', auth.currentUser.uid))
-    const snapshot = await getDocs(q)
-    completedRef = collection(currUserDocRef, 'completed')
-    const cq = query(completedRef, where('id', '!=', '-1'))
-    const completedSnap = await getDocs(cq)
-    var completedArr = []
-    completedSnap.forEach((doc) => {
-        completedArr.push(doc.data())
-    })
-    // console.log(goalsArr)
-    return completedArr
-
-}
+    try{
+        const q = query(userCollectionRef, where('uid','==', auth.currentUser.uid))
+        const snapshot = await getDocs(q)
+        completedRef = collection(currUserDocRef, 'completed')
+        const cq = query(completedRef, where('id', '!=', '-1'))
+        const completedSnap = await getDocs(cq)
+        var completedArr = []
+        completedSnap.forEach((doc) => {
+            completedArr.push(doc.data())
+        })
+        // console.log(goalsArr)
+        return completedArr
+    
+    }catch (err) {
+        console.error(err)
+        alert(err.message)
+    }
+    }
 
 
 const addGoalDB = async (newGoal) => {
-    await addDoc(goalsRef, newGoal)
+    try{
+
+        await addDoc(goalsRef, newGoal)
+    }catch (err) {
+        console.error(err)
+        alert(err.message)
+    }
 }
 const addCompletedDB = async (newGoal) => {
-    await addDoc(completedRef, newGoal)
+    try{
+
+        await addDoc(completedRef, newGoal)
+    }catch (err) {
+        console.error(err)
+        alert(err.message)
+    }
 }
 
 
@@ -148,8 +179,9 @@ const updateGoalDB = async (newGoal) => {
     const goalSnap = await getDocs(gq)
     var goalDocId = goalSnap.docs[0].id
     await setDoc(doc(goalsRef, goalDocId),newGoal)
-}catch(err){
+}catch (err) {
     console.error(err)
+    alert(err.message)
 }
 
 }
@@ -160,8 +192,9 @@ const changeGoalIdDB = async (newGoal, newId) => {
     var goalDocId = goalSnap.docs[0].id
     newGoal.id = newId
     await setDoc(doc(goalsRef, goalDocId),newGoal)
-}catch(err){
+}catch (err) {
     console.error(err)
+    alert(err.message)
 }
 
 }
@@ -172,8 +205,9 @@ const updateCompletedDB = async (newGoal) => {
     const completedSnap = await getDocs(cq)
     var completedDocId = completedSnap.docs[0].id
     await setDoc(doc(completedRef, completedDocId),newGoal)
-}catch(err){
+}catch (err) {
     console.error(err)
+    alert(err.message)
 }
 
 }
@@ -185,24 +219,36 @@ const changeCompletedIdDB = async (newGoal,newId) => {
     var completedDocId = completedSnap.docs[0].id
     newGoal.id = newId
     await setDoc(doc(completedRef, completedDocId),newGoal)
-}catch(err){
+}catch (err) {
     console.error(err)
+    alert(err.message)
 }
 
 }
 
 const deleteGoalDB = async (newGoal) => {
-    const gq = query(goalsRef, where('id', '==', newGoal.id))
-    const goalSnap = await getDocs(gq)
-    var goalDocRef = goalSnap.docs[0].ref
-    await deleteDoc(goalDocRef)
+    try{
+        const gq = query(goalsRef, where('id', '==', newGoal.id))
+        const goalSnap = await getDocs(gq)
+        var goalDocRef = goalSnap.docs[0].ref
+        await deleteDoc(goalDocRef)
+    }catch (err) {
+        console.error(err)
+        alert(err.message)
+    }
 
 }
 const deleteCompletedDB = async (newGoal) => {
-    const cq = query(completedRef, where('id', '==', newGoal.id))
-    const completedSnap = await getDocs(cq)
-    var completedDocRef = completedSnap.docs[0].ref
-    await deleteDoc(completedDocRef)
+    try{
+
+        const cq = query(completedRef, where('id', '==', newGoal.id))
+        const completedSnap = await getDocs(cq)
+        var completedDocRef = completedSnap.docs[0].ref
+        await deleteDoc(completedDocRef)
+    }catch (err) {
+        console.error(err)
+        alert(err.message)
+    }
 
 }
 
