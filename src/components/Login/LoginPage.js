@@ -49,7 +49,7 @@ const LoginPage = ({setShowLogin, setGoals, setCompleted}) => {
                 <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} onKeyPress={handleKeyPress} />
 
                 <div className="sign-in-container">
-                <button className='sign-in-btn-a' onClick={async () => { let [goals, completed] = await logInWithEmailAndPassword(email, password);setShowLogin(false);
+                <button className='sign-in-btn' onClick={async () => { let [goals, completed] = await logInWithEmailAndPassword(email, password);setShowLogin(false);
                   goals.sort((a,b) => b.id - a.id);setGoals(goals);
                   completed.sort((a,b) => b.id - a.id); setCompleted(completed)}} >Sign in</button>
                 <p>or</p>

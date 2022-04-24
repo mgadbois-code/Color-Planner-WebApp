@@ -54,7 +54,7 @@
     font-weight: bold;
     /* border: solid black; */
 }
-.sign-in-btn-a {
+.sign-in-btn {
     cursor: pointer;
     color: white;
     font-weight: bold;
@@ -65,6 +65,17 @@
     padding: 10px 25px;
     width: 40%;
     
+}
+
+@media screen and (max-width:920px){
+    .sign-in-btn {
+        padding: 0px;
+
+    }
+    .google-sign-in-btn{
+        padding: 5px 12px;
+    }
+
 }
 .send-reset-btn {
     cursor: pointer;

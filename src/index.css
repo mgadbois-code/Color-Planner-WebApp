@@ -88,6 +88,17 @@ body {
   width: 100px
 }
 
+#refresh-btn {
+  border: none;
+  background: none;
+  position: absolute;
+  font-size: 30px;
+  padding: 5px;
+}
+#refresh-btn:active {
+  transform: scale(0.8);
+}
+
 .sign-in-window {
   position: absolute;
   width: 100%;
@@ -134,8 +145,7 @@ body {
   border: none;
   border-radius: 10px;
   padding: 10px;
-  margin: 8px;
-  width: 15%;
+  margin-left: 10px;
 }
 @media screen and (max-width: 920px){
 .edit-done-btn {
@@ -214,6 +224,7 @@ body {
 
 .completed-btn {
   margin-right:5px; 
+  color: black;
   background-color:yellow; 
   border-radius: 5px;
   border: 2px black solid;

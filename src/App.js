@@ -47,6 +47,7 @@ function App() {
 
 const getGoals = async () => {
   let goals = await getUserGoals()
+  goals.sort((a,b) => b.id - a.id)
   setGoals(goals)
   // var goalsFromFile = await fetchGoals();
 
@@ -55,6 +56,7 @@ const getGoals = async () => {
 }
 const getCompleted = async () => {
   let completed = await getUserCompleted()
+  completed.sort((a,b) => b.id - a.id)
   setCompleted(completed)
   // var completedFromFile = await fetchCompleted();
   // let c = await JSON.parse(completedFromFile).completed
@@ -731,12 +733,13 @@ const toggleVisible = async (goalId) => {
           <LoginPage setShowLogin={setShowLogin} setGoals={setGoals} setCompleted={setCompleted} />   
       </div>}
       <div className="heading">
-        {!user && !showLogin && 
-        <div className="offline-warning" >
-          <h5 className="warning">⚠️You are not signed in.⚠️<p>Goals will not be saved!</p></h5>
-        </div>}
-        {user ? <button id='sign-in-btn' onClick={() => {logout(); setGoals([]); setCompleted([]); setShowLogin(true) }}>Sign Out</button> :
-        <button id='sign-in-btn' onClick={() => setShowLogin(true)}>Sign in</button>}
+          {!user && !showLogin && 
+          <div className="offline-warning" >
+            <h5 className="warning">⚠️You are not signed in.⚠️<p>Sign in to create and save goals!</p></h5>
+          </div>}
+          {user && <button id="refresh-btn" onClick={async () => {await getGoals();await getCompleted()}} >🔄</button> }
+          {user ? <button id='sign-in-btn' onClick={() => {logout(); setGoals([]); setCompleted([]); setShowLogin(true) }}>Sign Out</button> :
+          <button id='sign-in-btn' onClick={() => setShowLogin(true)}>Sign in</button>}
       </div>
     <div className="App">
         <div id="app-container">
