@@ -187,9 +187,13 @@ const updateGoalDB = async (newGoal) => {
 }
 const changeGoalIdDB = async (newGoal, newId) => {
     try{
-    const gq = query(goalsRef, where('id', '==', newGoal.id))
+    const gq = query(goalsRef, where('id', '==', newGoal.id), where('title', '==',newGoal.title),where('color','==',newGoal.color))
     const goalSnap = await getDocs(gq)
     var goalDocId = goalSnap.docs[0].id
+    if(goalSnap.docs.length > 1){
+        console.log('multiple ids')
+        
+    }
     newGoal.id = newId
     await setDoc(doc(goalsRef, goalDocId),newGoal)
 }catch (err) {
@@ -214,7 +218,7 @@ const updateCompletedDB = async (newGoal) => {
 const changeCompletedIdDB = async (newGoal,newId) => {
     try{
     // console.log(newGoal)
-    const cq = query(completedRef, where('id', '==', newGoal.id))
+    const cq = query(completedRef, where('id', '==', newGoal.id),where('title', '==',newGoal.title),where('color','==',newGoal.color), where('dateDone', '==', newGoal.dateDone))
     const completedSnap = await getDocs(cq)
     var completedDocId = completedSnap.docs[0].id
     newGoal.id = newId

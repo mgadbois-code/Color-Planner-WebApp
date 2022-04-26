@@ -515,6 +515,9 @@ const reOrderTaskDown = async (goalId,taskId, taskArr, onTaskList=false) =>{
 
 const reOrderGoalUp = async (goalId) => {
   let goalsArr = [...goals]
+  if(goalsArr.length == 1){
+    return
+  }
   var switchIndex
   for(let i = 0; i< goalsArr.length; i++){
     if(goalsArr[i].id == goalId){
@@ -554,6 +557,9 @@ const reOrderGoalUp = async (goalId) => {
 
 const reOrderGoalDown = async (goalId) => {
   let goalsArr = [...goals]
+  if(goalsArr.length == 1){
+    return
+  }
   for(let i = 0; i< goalsArr.length; i++){
     if(goalsArr[i].id == goalId){
         let switchIndex = i+1
@@ -592,6 +598,9 @@ await changeGoalIdDB(tempGoalDB, movingGoalId)
 
 const reOrderCompletedUp = async (goalId) => {
   let completedArr = [...completed]
+  if(completedArr.length == 1){
+    return
+  }
   for(let i = 0; i< completedArr.length; i++){
     if(completedArr[i].id == goalId){
         let switchIndex = i-1;
@@ -622,6 +631,9 @@ const reOrderCompletedUp = async (goalId) => {
 
 const reOrderCompletedDown = async(goalId) => {
   let completedArr = [...completed]
+  if(completedArr.length == 1){
+    return
+  }
   for(let i = 0; i< completedArr.length; i++){
     if(completedArr[i].id == goalId){
         let switchIndex = i+1
@@ -769,7 +781,7 @@ const toggleVisible = async (goalId) => {
       {!minimizeTasks && <div className="container">
           {/* Tasks components */}
           <MinMaxButtons windowWidth={windowWidth} component = "Tasks" miniTasks = {minimizeTasks} miniGoals = {minimizeGoals} toggleMiniTasks={() => toggleMiniTasks()} toggleMiniGoals={() => toggleMiniGoals()} />
-          {showAddTask ? <Header titleName="Tasks" buttonColor="red" buttonText="✖️ Never Mind" title="New Tasks" onAdd={() => (setShowAddTask(!showAddTask))}/> : 
+          {showAddTask ? <Header titleName="Today's Tasks" buttonColor="red" buttonText="✖️ Never Mind" title="New Tasks" onAdd={() => (setShowAddTask(!showAddTask))}/> : 
           <Header titleName= "Today's Tasks" goals={goals} title="Tasks"  onAdd={handleDropDown} />}
           {showAddTask && <AddTask addToGoalColor={goals.filter(goal => goal.id == addToGoal)[0].color} 
           onSubmit={submitTasks} buttonColor="red" buttonText="✖️ Never Mind" title="New Tasks" onAdd={() => (setShowAddTask(!showAddTask))}/>}
