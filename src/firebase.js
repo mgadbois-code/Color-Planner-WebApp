@@ -175,7 +175,7 @@ const addCompletedDB = async (newGoal) => {
 const updateGoalDB = async (newGoal) => {
     try{
     // console.log(newGoal)
-    const gq = query(goalsRef, where('id', '==', newGoal.id))
+    const gq = query(goalsRef, where('id', '==', newGoal.id), where('title', '==',newGoal.title),where('color','==',newGoal.color))
     const goalSnap = await getDocs(gq)
     var goalDocId = goalSnap.docs[0].id
     await setDoc(doc(goalsRef, goalDocId),newGoal)
@@ -205,7 +205,7 @@ const changeGoalIdDB = async (newGoal, newId) => {
 const updateCompletedDB = async (newGoal) => {
     try{
     // console.log(newGoal)
-    const cq = query(completedRef, where('id', '==', newGoal.id))
+    const cq = query(completedRef, where('id', '==', newGoal.id),where('title', '==',newGoal.title),where('color','==',newGoal.color), where('dateDone', '==', newGoal.dateDone))
     const completedSnap = await getDocs(cq)
     var completedDocId = completedSnap.docs[0].id
     await setDoc(doc(completedRef, completedDocId),newGoal)
@@ -232,7 +232,7 @@ const changeCompletedIdDB = async (newGoal,newId) => {
 
 const deleteGoalDB = async (newGoal) => {
     try{
-        const gq = query(goalsRef, where('id', '==', newGoal.id))
+        const gq = query(goalsRef, where('id', '==', newGoal.id), where('title', '==',newGoal.title),where('color','==',newGoal.color))
         const goalSnap = await getDocs(gq)
         var goalDocRef = goalSnap.docs[0].ref
         await deleteDoc(goalDocRef)
@@ -245,7 +245,7 @@ const deleteGoalDB = async (newGoal) => {
 const deleteCompletedDB = async (newGoal) => {
     try{
 
-        const cq = query(completedRef, where('id', '==', newGoal.id))
+        const cq = query(completedRef, where('id', '==', newGoal.id),where('title', '==',newGoal.title),where('color','==',newGoal.color), where('dateDone', '==', newGoal.dateDone))
         const completedSnap = await getDocs(cq)
         var completedDocRef = completedSnap.docs[0].ref
         await deleteDoc(completedDocRef)

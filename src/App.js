@@ -65,8 +65,22 @@ const getCompleted = async () => {
 
 // Get Goals when first loaded and logged in
 
+useEffect( () => {
+  auth.onAuthStateChanged(function(user) {
+    if(user){
+      getGoals()
+      getCompleted()
+      setShowLogin(false)
+    }
+    else{
+      setShowLogin(true)
+    }
+   
+  })
 
+}, [])
 //
+
 
 
 
@@ -176,7 +190,7 @@ const toggleEditGoal = async (id) => {
 // 
 const removeGoal = async (goalId, done) => {
  
-    var removedGoal
+    let removedGoal
    
     let newGoals = goals.filter((goal) => {
       if(goal.id != goalId){
@@ -186,9 +200,10 @@ const removeGoal = async (goalId, done) => {
       removedGoal = goal
       return false
   }})
+  setGoals(newGoals)
 
   if(user){
-    await deleteGoalDB({id:goalId})
+    await deleteGoalDB(removedGoal)
   }
 
   for(let i= 0; i< newGoals.length; i++ ){
@@ -215,12 +230,21 @@ const removeGoal = async (goalId, done) => {
 }
 
 const removeCompleted = async (goalId) => {
+  let removedGoal
+  let newCompleted =   completed.filter((goal) => {
+    if(goal.id != goalId){
+    return true
+  }
+  else{
+    removedGoal = goal
+    return false
+}})
+  setCompleted(newCompleted)
 
   if(user){
-    await deleteCompletedDB({id: goalId})
+    await deleteCompletedDB(removedGoal)
   }
 
-  let newCompleted =   completed.filter( (goal) => goal.id != goalId)
     for(let i = 0; i< newCompleted.length; i++){
       if(user){
         await changeCompletedIdDB(newCompleted[i], newCompleted.length - i)
@@ -749,7 +773,7 @@ const toggleVisible = async (goalId) => {
           <div className="offline-warning" >
             <h5 className="warning">⚠️You are not signed in.⚠️<p>Sign in to create and save goals!</p></h5>
           </div>}
-          {user && <button id="refresh-btn" onClick={async () => {await getGoals();await getCompleted()}} >🔄</button> }
+         
           {user ? <button id='sign-in-btn' onClick={() => {logout(); setGoals([]); setCompleted([]); setShowLogin(true) }}>Sign Out</button> :
           <button id='sign-in-btn' onClick={() => setShowLogin(true)}>Sign in</button>}
       </div>

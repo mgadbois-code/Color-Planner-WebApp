@@ -65,6 +65,7 @@ body {
 #app-container {
   display: flex;
   width: 80%;
+  /* border: solid black; */
 }
 
 @media screen and (max-width: 920px) {
@@ -90,17 +91,6 @@ body {
 
 
 
-#refresh-btn {
-  border: none;
-  background: none;
-  position: absolute;
-  font-size: 30px;
-  padding: 5px;
-}
-#refresh-btn:active {
-  transform: scale(0.8);
-}
-
 .sign-in-window {
   position: absolute;
   width: 100%;
@@ -125,7 +115,7 @@ body {
   /* margin-left: 30px;; */
   /* max-width: 500px; */
   min-height: 500px;
-  min-width: 40%;
+  min-width: 100%;
   padding: 10px 20px;
   border-radius: 10px;
 }
