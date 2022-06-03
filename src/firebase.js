@@ -172,10 +172,10 @@ const addCompletedDB = async (newGoal) => {
 
 
 
-const updateGoalDB = async (newGoal) => {
+const updateGoalDB = async (oldGoal,newGoal) => {
     try{
     // console.log(newGoal)
-    const gq = query(goalsRef, where('id', '==', newGoal.id), where('title', '==',newGoal.title),where('color','==',newGoal.color))
+    const gq = query(goalsRef, where('id', '==', oldGoal.id), where('title', '==',oldGoal.title),where('color','==',oldGoal.color))
     const goalSnap = await getDocs(gq)
     var goalDocId = goalSnap.docs[0].id
     await setDoc(doc(goalsRef, goalDocId),newGoal)

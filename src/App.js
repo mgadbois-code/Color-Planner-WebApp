@@ -35,7 +35,6 @@ function App() {
   const [holdingGoalMinimize, setHoldingGoalMinimize] =useState(false);
   const [completed, setCompleted] = useState([ ])
   const [goals, setGoals] = useState([ ])
-  const [goalColor,setGoalColor] = useState("white")
   const [windowWidth, setWindowWidth] = useState(800)
 
   var date = new Date();
@@ -157,7 +156,7 @@ const toggleSubGoals = async (id) => {
     return goal
   }))
   
-  await updateGoalDB(newGoal)
+  await updateGoalDB(newGoal,newGoal)
 }
 
 const toggleSubCompleted = (id) => {
@@ -184,7 +183,7 @@ const toggleEditGoal = async (id) => {
     return goal
   }))
 
-  await updateGoalDB(updGoal)
+  await updateGoalDB(updGoal,updGoal)
 }
 
 // 
@@ -279,7 +278,7 @@ const addTask = async (goalId, taskTitle) => {
 
   // await updGoalsDB(newGoals)
   setGoals(newGoals)
-  await updateGoalDB(updGoal)
+  await updateGoalDB(updGoal,updGoal)
   
 
 }
@@ -307,7 +306,7 @@ const removeTask = async (goalId, taskId) => {
 
   // await updGoalsDB(newGoals)
   setGoals(newGoals)
-  await updateGoalDB(updGoal)
+  await updateGoalDB(updGoal,updGoal)
 
   
 
@@ -343,7 +342,7 @@ let newGoals = goals.map((goal) => {
 })
 
 setGoals(newGoals)
-await updateGoalDB(updGoal)
+await updateGoalDB(updGoal,updGoal)
 // await updGoalsDB(newGoals)
 
  
@@ -375,7 +374,7 @@ let newGoals = goals.map((goal) => {
 
 setGoals(newGoals)
 if(user){
-  await updateGoalDB(updGoal)
+  await updateGoalDB(updGoal,updGoal)
 }
 // await updGoalsDB(newGoals)
 
@@ -385,21 +384,21 @@ if(user){
 //When submit button is clicked in addTask component it toggles view, adds the task to the target goal, uses setGoals
 //used to be async
 
-const submitGoalEdits = async(goalId,newGoal) =>{
+const submitGoalEdits = async(oldGoal,newGoal) =>{
   if(newGoal.tasks.length == 0){
-    await removeGoal(goalId, false)
+    await removeGoal(oldGoal.id, false)
     return
   }
   
   setGoals(goals.map(goal => {
-    if(goal.id == goalId){
+    if(goal.id == oldGoal.id){
       // console.log(newGoal)
       return newGoal
     }
     return goal
   }))
   // console.log(newGoal.id)
-  await updateGoalDB(newGoal)
+  await updateGoalDB(oldGoal, newGoal)
   // await updGoalsDB(goals)
 }
 
@@ -437,7 +436,7 @@ const submitTasks = async(taskArr) =>{
   // addTaskDB([newTasks, addToGoal])
 
   setGoals(newGoals)
-  updateGoalDB(targetGoal)
+  updateGoalDB(targetGoal, targetGoal)
   // await updGoalsDB(newGoals)
 }
 
@@ -496,7 +495,7 @@ const reOrderTaskUp = async (goalId,taskId, taskArr, onTaskList = false) =>{
     return goal
   })))
 
-  await updateGoalDB(updGoal)
+  await updateGoalDB(updGoal,updGoal)
   
 }
 
@@ -534,7 +533,7 @@ const reOrderTaskDown = async (goalId,taskId, taskArr, onTaskList=false) =>{
     return goal
   })))
   
-  await updateGoalDB(updGoal)
+  await updateGoalDB(updGoal,updGoal)
 }
 
 const reOrderGoalUp = async (goalId) => {
@@ -724,7 +723,7 @@ const toggleAllToday = async (goalId, status) => {
   })
 
   setGoals(newGoals)
-  await updateGoalDB(updGoal)
+  await updateGoalDB(updGoal,updGoal)
   
 
 }
@@ -759,7 +758,7 @@ const toggleVisible = async (goalId) => {
   
 
   setGoals(newGoals)
-  await updateGoalDB(targetGoal)
+  await updateGoalDB(targetGoal, targetGoal)
 }
 
   return (

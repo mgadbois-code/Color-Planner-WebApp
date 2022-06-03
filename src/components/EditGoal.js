@@ -6,8 +6,8 @@ import ReOrderButtons from './ReOrderButtons'
 import { HuePicker, SliderPicker } from "react-color"
 import GoalList from './GoalList'
 
-const EditGoal = ({submitGoalEdits,toggleShowEditGoal,reOrderTaskUp,reOrderTaskDown,showDialogBox, reOrderGoalUp,reOrderGoalDown, goalId, goalColor, goal,goals}) => {
-    var [goalName,setGoalName] = useState(goal.title)
+const EditGoal = ({submitGoalEdits,toggleShowEditGoal,reOrderTaskUp,reOrderTaskDown,showDialogBox, reOrderGoalUp,reOrderGoalDown, goalId, goalColor,goalTitle, goal,goals}) => {
+    var [newGoalTitle,setNewGoalTitle] = useState(goalTitle)
     var [goalDueDate, setGoalDueDate] = useState(goal.dueDate)
     var [color,setColor] = useState(goalColor)
     var [newTask,setNewTask] = useState("")
@@ -20,6 +20,7 @@ const EditGoal = ({submitGoalEdits,toggleShowEditGoal,reOrderTaskUp,reOrderTaskD
     //     // console.log(color.hex)
 
     // }
+    let oldGoal = {id:goalId, color:goalColor, title:goalTitle}
 
     const removeTask = (taskId) => {
         let tasks = goal.tasks;
@@ -32,7 +33,7 @@ const EditGoal = ({submitGoalEdits,toggleShowEditGoal,reOrderTaskUp,reOrderTaskD
         })
         // setTaskArr(tasks)
         goal.tasks = tasks
-        submitGoalEdits(goalId,goal)
+        submitGoalEdits(oldGoal,goal)
         
     }
 
@@ -52,7 +53,7 @@ const EditGoal = ({submitGoalEdits,toggleShowEditGoal,reOrderTaskUp,reOrderTaskD
 
     const editGoalTitle = (newTitle)=>{
         goal.title= newTitle
-        setGoalName(newTitle)
+        setNewGoalTitle(newTitle)
 
     }
   
@@ -78,14 +79,14 @@ const EditGoal = ({submitGoalEdits,toggleShowEditGoal,reOrderTaskUp,reOrderTaskD
         })
         // setTaskArr(tasks)
         goal.tasks = tasks
-        submitGoalEdits(goal.id,goal)
+        submitGoalEdits(oldGoal,goal)
     }
 
     const handleKeyPress = (event) => {
         if(event.key === 'Enter'){
           event.preventDefault();
           addTask(newTask)
-          submitGoalEdits(goalId,goal)
+          submitGoalEdits(oldGoal,goal)
         //   console.log("Enter Press")
         }
       }
@@ -97,7 +98,7 @@ const EditGoal = ({submitGoalEdits,toggleShowEditGoal,reOrderTaskUp,reOrderTaskD
                     <input autoFocus className="h3 edit-goal-title" placeholder={goal.title} value={goal.title} onChange={(event) => {editGoalTitle(event.target.value)}}></input>
                     <ReOrderButtons styling="goal-reorder" reOrderUp={() => {reOrderGoalUp(goal.id)}} reOrderDown={() => {reOrderGoalDown(goal.id)}} size="40px" />
                     <button onClick={() => {goal.showEditGoal=false;
-                        submitGoalEdits(goalId,goal)}} className="edit-done-btn" style={{backgroundColor:goal.color}}>{goal.tasks.length == 0 ? "Remove" : "Done"}</button>
+                        submitGoalEdits(oldGoal,goal)}} className="edit-done-btn" style={{backgroundColor:goal.color}}>{goal.tasks.length == 0 ? "Remove" : "Done"}</button>
                 </div>
     
  
@@ -110,10 +111,10 @@ const EditGoal = ({submitGoalEdits,toggleShowEditGoal,reOrderTaskUp,reOrderTaskD
                 <div>
                     <HuePicker color={goal.color} onChange={(color,event) => editGoalColor(color,event)} />
                 {goal.tasks.map((task)=>
-                    <div className="flex" style={{marginTop:"5px"}}>
+                    <div className="flex" style={{alignItems:'center'}}>
                         <ReOrderButtons styling="task-reorder" reOrderUp={() => reOrderTaskUp(goalId,task.id,goal.tasks)} reOrderDown={() => reOrderTaskDown(goalId,task.id,goal.tasks)} size="20px" />
-                        <input className="p" value={goal.tasks.filter(arrTask => arrTask.id == task.id)[0].title} onChange={(event) => {editTaskTitle(task.id,event.target.value)}}></input>
-                        <ItemRemoveButton size="20px" className="p small-btn" removeGoal={() => {removeTask(task.id)}} allDone="1" />
+                        <input className="p" style={{marginLeft: '4px',}} value={goal.tasks.filter(arrTask => arrTask.id == task.id)[0].title} onChange={(event) => {editTaskTitle(task.id,event.target.value)}}></input>
+                        <ItemRemoveButton size="20px" removeGoal={() => {removeTask(task.id)}} allDone="1" />
                     </div>
                     )}
                     <div className="flex" style={{marginTop: "7px"}}>
@@ -121,7 +122,7 @@ const EditGoal = ({submitGoalEdits,toggleShowEditGoal,reOrderTaskUp,reOrderTaskD
                             <label style={{fontWeight:"bold", fontSize:"12px", backgroundColor:"white",padding:"12px 2px 2px"}} for="New Task">Add Task: </label>
                             <input style={{margin:"5px 7px 2px 0px"}}  name="New Task" className="p" value={newTask} placeholder="New Task" onChange={(event) => {setNewTask(event.target.value)}} onKeyPress={handleKeyPress} />
                             <button style = {{backgroundColor:"green", color:"white",fontSize:"20px",fontWeight:"bold",margin:"5px 0px 5px 0px", padding:"0px 5px 0px 5px"}}
-                            onClick ={(event) => {addTask(newTask); submitGoalEdits(goalId,goal)}} className="plus-btn"> + </button>
+                            onClick ={(event) => {addTask(newTask); submitGoalEdits(oldGoal,goal)}} className="plus-btn"> + </button>
                          </div>
                     </div>
                 </div>

@@ -6,6 +6,9 @@ import EditGoal from "./EditGoal"
 import AllTodayButton from "./AllTodayButton"
 import React from "react"
 import { useState } from "react"
+import {ReactComponent as CheckboxChecked} from '../checkbox_checked.svg'
+import {ReactComponent as CheckboxUnchecked} from '../checkbox_unchecked.svg'
+
 
 
 const Goal = (props) => {
@@ -23,16 +26,16 @@ const Goal = (props) => {
     if(props.showEditGoal){
         return (
             <EditGoal submitGoalEdits={props.submitGoalEdits} goals={props.goals} reOrderGoalUp={props.reOrderGoalUp} reOrderGoalDown={props.reOrderGoalDown} reOrderTaskUp={props.reOrderTaskUp} reOrderTaskDown={props.reOrderTaskDown} 
-            addTask={props.addTask} removeTask={props.removeTask} toggleShowEditGoal={props.toggleShowEditGoal} goalId = {props.goal.id} goalColor={props.goal.color} goal={props.goal} />
+            addTask={props.addTask} removeTask={props.removeTask} toggleShowEditGoal={props.toggleShowEditGoal} goalId = {props.goal.id} goalColor={props.goal.color} goalTitle={props.goal.title} goal={props.goal} />
         )
     }
 
     return (
-        <div className="item pointer" style={{border:"solid 6px", borderColor: props.goal.color, overflow:"auto"}} onClick={() => props.onToggle(props.goal.id)}>
+        <div className="item pointer" style={{border:"solid 6px", borderColor: props.goal.color, overflow:"auto",background:`${props.goal.color}`}} onClick={() => props.onToggle(props.goal.id)}>
             
             <div className="header" style={{marginTop:"-5px"}}>
                 {/* goal title */}
-                <h3 className="detail flex"  onClick={() => props.onToggle(props.goal.id)}>{props.goal.title} 
+                <h3 className="detail flex"  style={{fontWeight: '550'}} onClick={() => props.onToggle(props.goal.id)}>{props.goal.title} 
                 
                 
                 </h3>
@@ -51,9 +54,9 @@ const Goal = (props) => {
             <div className="flex" style={{overflow:"auto"}}>
                 {!props.goal.showSubGoals && props.goal.tasks.map((task) =>{
                     if(task.done){
-                        return <p className="flex" >✅</p>
+                        return <CheckboxChecked className='checkbox-goal' />
                     }
-                    return <p className="flex">⬜</p>
+                    return <CheckboxUnchecked className='checkbox-goal' />
                 })}
             </div>
 
