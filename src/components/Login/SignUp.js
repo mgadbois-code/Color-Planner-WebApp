@@ -8,7 +8,7 @@ import {
   signInWithGoogle,
 } from "../../firebase";
 import './login.css'
-
+import {ReactComponent as BackButton} from '../../back_button.svg'
 const SignUp = ({setShowLogin, setShowSignUp}) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -33,7 +33,7 @@ useEffect( () => {
   return (
     <div>
          <div >
-           <button className='back-btn' onClick={() => setShowSignUp(false)}>🔙</button>
+         <BackButton className='back-btn' style={{width:'30px', height:'auto', cursor:'pointer'}} onClick={() => setShowSignUp(false)} />
            <div className="sign-in-header">
               <h1>Create An Account</h1>
               <img src={logo} alt="" />

@@ -6,12 +6,14 @@ import {
   signInWithGoogle,
 } from "../../firebase";
 import './login.css'
+import {ReactComponent as BackButton} from '../../back_button.svg'
 
 const ForgotPassword = ({setShowForgotPassword, loginEmail, sendPasswordReset}) => {
     const [email, setEmail] = useState(loginEmail)
   return (
     <div>
-        <button className='back-btn' onClick={() => setShowForgotPassword(false)}>🔙</button>
+      <BackButton className='back-btn' style={{width:'30px', height:'auto',cursor:'pointer'}} onClick={() => setShowForgotPassword(false)} />
+        {/* <button className='back-btn' onClick={() => setShowForgotPassword(false)}>🔙</button> */}
         <h1>Forgot Password</h1>
         <div className="login-form">
             <label htmlFor="email">Email:</label>
