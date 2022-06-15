@@ -10,6 +10,16 @@ body {
   grid-template-columns: 2fr 1fr;
 
 }
+#calendar-btn {
+  border: none;
+  background: none;
+  position: absolute;
+  font-size: 30px;
+  padding: 5px;
+}
+#calendar-btn:active {
+  transform: scale(0.8);
+}
 
 .offline-warning {
   display: grid;
@@ -335,12 +345,27 @@ body {
 
 }
 
-.min-max-btn {
+.min-max-btn-true {
+  outline: 3px solid orange;
+  border:solid 3px orange;
+  background-color: yellow;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+  
+}
+.min-max-btn-false {
   border:solid 2px black;
   color: black;
   font-weight: bold;
-  border-radius: 20%;
-  width: 30px;
+  border-radius: 5px;
+}
+.min-max-btn-Goals {
+  border:solid 2px black;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+  
 }
 
 .plus-btn {

@@ -1,0 +1,62 @@
+.calendar-container {
+    margin-top: 20px;
+    width: 800px;
+    height: 800px;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.calendar-days{
+    display: grid;
+    min-height: 600px;
+   
+    background: white;
+   
+    grid-template-columns: repeat(7,1fr);
+    grid-template-rows: repeat(6,1fr);
+    border: solid black;
+    /* grid-template-rows: repeat(7, 30px); */
+}
+
+.calendar{
+    border: solid black;
+    padding: 20px;
+    border-radius: 20px;
+    height: 700px;
+
+}
+
+
+@media screen and (max-width: 920px){
+    .calendar-container{
+        min-height: 100%;
+        display: flex;
+        justify-content: center;
+               
+    }
+    .calendar-days{
+        min-width: 460px;
+        padding: 20px 0px 0px 0px;
+
+        border-radius: 0px;
+        margin: 0px;
+    }
+   
+}
+
+
+.day-square-true{
+    border: solid black;
+    height: 100px;
+    overflow-y: scroll;
+}
+.completed-tasks{
+    height: 100px;
+
+}
+.week-days-header{
+    display: grid;
+    text-align: center;
+    grid-template-columns: repeat(7, 1fr);
+}

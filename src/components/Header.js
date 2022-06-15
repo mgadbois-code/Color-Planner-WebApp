@@ -8,10 +8,10 @@ const Header = (props) => {
     return (
         <header className="header">
            {props.title==="Goals" &&
-            <button className="btn" style={{backgroundColor: props.buttonColor, color: "white"}} onClick={props.onAdd}>{props.buttonText}</button>
+            <button className="btn" style={{backgroundColor: props.buttonColor, color: "white"}} onClick={props.onAdd}>Create Goal</button>
             }
            {props.title==="Tasks" &&
-           <DropdownButton onSelect={props.onAdd} id="drop-down" title="Add">
+           <DropdownButton onSelect={props.onAdd} id="drop-down" title="Add Task">
           {props.goals.length > 0 && props.goals.filter(goal => goal.visible).map(goal => <Dropdown.Item  eventKey={goal.id} >{goal.title}</Dropdown.Item>)}
           {props.goals.length > 0 && <Dropdown.Divider />}
           <Dropdown.Item eventKey="newGoal">New Goal</Dropdown.Item>

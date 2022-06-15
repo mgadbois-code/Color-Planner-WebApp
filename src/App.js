@@ -12,6 +12,7 @@ import GoalList from "./components/GoalList";
 import MinMaxButtons from "./components/MinMaxButtons";
 import CompletedList from "./components/CompletedList";
 import HiddenList from "./components/HiddenList";
+import Calendar from "./components/Calendar/Calendar";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, changeGoalIdDB } from "./firebase";
@@ -24,6 +25,7 @@ function App() {
   const [user, loading, error] = useAuthState(auth)
   const [loaded, setLoaded] = useState(false)
   
+  const [showCalendar, setShowCalendar] = useState(false)
   const [showLogin, setShowLogin] = useState(true)
   const [showAddGoal, setShowAddGoal] = useState(false)
   const [showAddTask, setShowAddTask] = useState(false)
@@ -767,12 +769,16 @@ const toggleVisible = async (goalId) => {
       <div className="sign-in-window" onClick={() => setShowLogin(false)}>
           <LoginPage setShowLogin={setShowLogin} setGoals={setGoals} setCompleted={setCompleted} />   
       </div>}
+      {showCalendar && !showLogin &&
+      <div className="sign-in-window" onClick={() => setShowCalendar(false)}>
+          <Calendar date= {date} completed={completed} goals={goals}/>   
+      </div>}
       <div className="heading">
           {!user && !showLogin && 
           <div className="offline-warning" >
             <h5 className="warning">⚠️You are not signed in.⚠️<p>Sign in to create and save goals!</p></h5>
           </div>}
-         
+          <button id="calendar-btn" onClick={() => setShowCalendar(true)}>📅</button>
           {user ? <button id='sign-in-btn' onClick={() => {logout(); setGoals([]); setCompleted([]); setShowLogin(true) }}>Sign Out</button> :
           <button id='sign-in-btn' onClick={() => setShowLogin(true)}>Sign in</button>}
       </div>
@@ -781,7 +787,7 @@ const toggleVisible = async (goalId) => {
           {!minimizeGoals && <div className = "container">
           {/* Goals components */}
           <div style={{display:"flex", flexDirection:"row-reverse" }}>
-            <MinMaxButtons windowWidth={windowWidth} component = "Goals" miniTasks = {minimizeTasks} miniGoals = {minimizeGoals} toggleMiniTasks={() => toggleMiniTasks()} toggleMiniGoals={() => setMinimizeGoals(!minimizeGoals)} />
+            <MinMaxButtons windowWidth={windowWidth} component = "Goals" goals={goals} miniTasks = {minimizeTasks} miniGoals = {minimizeGoals} toggleMiniTasks={() => toggleMiniTasks()} toggleMiniGoals={() => setMinimizeGoals(!minimizeGoals)} />
             { !showCompleted && completed.length > 0 ?<button className="completed-btn" onClick={() => {setShowCompleted(!showCompleted); setShowHiddenList(false)} }>Completed</button> : (completed.length > 0 || showCompleted) && <button className="completed-btn"  onClick={() => setShowCompleted(!showCompleted)}>Goals</button> }
             {(showHiddenList || goals.filter((goal) => !goal.visible).length > 0) && <button style={{backgroundColor:"steelblue"}} className="completed-btn" onClick={() => {setShowHiddenList(!showHiddenList); setShowCompleted(false)} }>{!showHiddenList ? "Hidden Goals" : "Goals"}</button>}
           </div>
@@ -803,7 +809,7 @@ const toggleVisible = async (goalId) => {
 
       {!minimizeTasks && <div className="container">
           {/* Tasks components */}
-          <MinMaxButtons windowWidth={windowWidth} component = "Tasks" miniTasks = {minimizeTasks} miniGoals = {minimizeGoals} toggleMiniTasks={() => toggleMiniTasks()} toggleMiniGoals={() => toggleMiniGoals()} />
+          <MinMaxButtons windowWidth={windowWidth} component = "Tasks" goals={goals} miniTasks = {minimizeTasks} miniGoals = {minimizeGoals} toggleMiniTasks={() => toggleMiniTasks()} toggleMiniGoals={() => toggleMiniGoals()} />
           {showAddTask ? <Header titleName="Today's Tasks" buttonColor="red" buttonText="✖️ Never Mind" title="New Tasks" onAdd={() => (setShowAddTask(!showAddTask))}/> : 
           <Header titleName= "Today's Tasks" goals={goals} title="Tasks"  onAdd={handleDropDown} />}
           {showAddTask && <AddTask addToGoalColor={goals.filter(goal => goal.id == addToGoal)[0].color} 
