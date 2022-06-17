@@ -49,7 +49,7 @@ const Goal = (props) => {
 
             </div>
 
-            {props.goal.dueDate !=="" && <h6 onClick={() => props.onToggle(props.goal.id)} className="detail">Due: {props.goal.dueDate} </h6>}
+            {props.goal.dueDate !=="" && <h6 style={{fontWeight:'bold'}} onClick={() => props.onToggle(props.goal.id)} className="detail">Due: {props.goal.dueDate} </h6>}
 
             <div className="flex" style={{overflow:"auto"}}>
                 {!props.goal.showSubGoals && props.goal.tasks.map((task) =>{

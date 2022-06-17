@@ -20,28 +20,53 @@ const Calendar = ({date, completed, goals}) => {
     const getCompletedTasks = (month, year) => {
         let tasks = goals.reduce((prevCompleted,completed) => {
                 let taskArr = completed.tasks.filter((task)=>{
-                   return (task.dateDone.split('/')[0] == (month+1) && task.dateDone.split('/')[2] == (year))
+                    task.color = completed.color
+                   return (task.hasOwnProperty('dateDone') && task.dateDone.split('/')[0] == (month+1) && task.dateDone.split('/')[2] == (year))
                })
                return prevCompleted.concat(taskArr)
            }, []).concat(completed.reduce((prevCompleted,completed) => {
                let taskArr = completed.tasks.filter((task)=>{
-                  return (task.dateDone.split('/')[0] == (month+1) && task.dateDone.split('/')[2] == (year))
+                    task.color = completed.color
+                  return (task.hasOwnProperty('dateDone') && task.dateDone.split('/')[0] == (month+1) && task.dateDone.split('/')[2] == (year))
               })
               return prevCompleted.concat(taskArr)
           }, []))
-          var dayArr = [...Array(monthDayNumberArr[month]).keys()].map((day)=>[])
+          let dayArr = [...Array(monthDayNumberArr[month]).keys()].map((day)=>[])
           
           for(let i = 0; i< tasks.length; i++){
-            dayArr[tasks[i].dateDone.split('/')[1] -1].push(tasks[i].title)
+            dayArr[tasks[i].dateDone.split('/')[1] -1].push(tasks[i])
 
           }
           return dayArr
           
         }
+        
+    const getDueGoals = (month, year) => {
+        let dueGoals = goals.filter((goal) => {
+            if(goal.dueDate.length == 0){
+                return false
+            }
+            let dueDate = goal.dueDate.split('-')
+            if( dueDate[1][0] == 0){
+                dueDate[1] = dueDate[1][1]
+            }
+            return dueDate[0] == year && dueDate[1] == month+1
+        })
+
+        let dayArr = [...Array(monthDayNumberArr[month]).keys()].map((day)=>[])
+          
+          for(let i = 0; i< dueGoals.length; i++){
+
+            dayArr[dueGoals[i].dueDate.split('-')[2] -1].push(dueGoals[i])
+
+          }
+          console.log(dayArr)
+          return dayArr
+    }
     
         const [completedTasks, setCompletedTasks] = useState(getCompletedTasks(month, year))
+        const [dueGoals, setDueGoals] = useState(getDueGoals(month,year))
         
-        console.log(completedTasks)
     
     
 
@@ -51,15 +76,31 @@ const Calendar = ({date, completed, goals}) => {
         if(forward){
             if(month+1 >11){
                 setYear(year +1)
+                let newMonth = new Date(year, (month+1)%12, 1); setMonth(newMonth.getMonth()); setDayOffset(newMonth.getDay())
+                setCompletedTasks(getCompletedTasks(newMonth.getMonth(), year+1))
+                setDueGoals(getDueGoals(newMonth.getMonth(), year+1)) 
+                
             }
-            let newMonth = new Date(year, (month+1)%12, 1); setMonth(newMonth.getMonth()); setDayOffset(newMonth.getDay())
+            else{
+                let newMonth = new Date(year, (month+1)%12, 1); setMonth(newMonth.getMonth()); setDayOffset(newMonth.getDay())
+                setCompletedTasks(getCompletedTasks(newMonth.getMonth(), year))
+                setDueGoals(getDueGoals(newMonth.getMonth(), year))
+                
+            }
         }
         else{
             if(month-1 <0){
                 setYear(year -1)
+                let newMonth = new Date(year, (month-1)%12, 1); setMonth(newMonth.getMonth()); setDayOffset(newMonth.getDay())
+                setCompletedTasks(getCompletedTasks(newMonth.getMonth(), year-1))
+                setDueGoals(getDueGoals(newMonth.getMonth(), year-1))
             }
-            let newMonth = new Date(year, (month-1)%12, 1); setMonth(newMonth.getMonth()); setDayOffset(newMonth.getDay())
-        }
+            else{
+                let newMonth = new Date(year, (month-1)%12, 1); setMonth(newMonth.getMonth()); setDayOffset(newMonth.getDay())
+                setCompletedTasks(getCompletedTasks(newMonth.getMonth(), year))
+                setDueGoals(getDueGoals(newMonth.getMonth(), year))
+            }
+            }
         return
     }
     return (
@@ -84,16 +125,21 @@ const Calendar = ({date, completed, goals}) => {
                 <div className="calendar-days">
                    {arr.map((monthDay) =>{
                     return <div className={`day-square-${(monthDay+1 - dayOffset) > 0 && (monthDay+1 - dayOffset) <= monthDayNumberArr[month]}`}>
-                        {/* <h3>{(monthDay - (dayOffset + 1) > 0) ? `${monthDay - dayOffset - 1}` : `${dayOffset}` }</h3> */}
-                        <div className="due-goal"></div>
-                        <div className="completed-goal"></div>
+                        
+                        
                         <div>{(monthDay+1 - dayOffset) > 0 && (monthDay+1 - dayOffset) <= monthDayNumberArr[month] ?
                             <div>
-                                <h5>{(monthDay+1 - dayOffset)}</h5>
+                                <h5 style={{position:'fixed'}}>{(monthDay+1 - dayOffset)}</h5>
+                               {dueGoals[monthDay - dayOffset].length > 0 &&  
+                               <div className="due-goal">
+                                    <ul>
+                                        {dueGoals[monthDay - dayOffset].map((goal) => <li  className='dueGoal-item' style={{background:`${goal.color}`, padding:'0px'}}>Due: {goal.title}</li>)}
+                                    </ul>
+                                </div>}
                                 {completedTasks[monthDay - dayOffset].length > 0 && 
                                 <div className="completed-tasks">
                                     <ul>
-                                        {completedTasks[monthDay - dayOffset].map((taskTitle) => <li>{taskTitle}</li>)}
+                                        {completedTasks[monthDay - dayOffset].map((task) => <li  className='task-item' style={{background:`${task.color}`}}>{task.title}</li>)}
                                     </ul>
                                 </div>}
                             </div>

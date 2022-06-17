@@ -1,6 +1,6 @@
 .calendar-container {
     margin-top: 20px;
-    width: 800px;
+    width: 900px;
     height: 800px;
     background: white;
     padding: 20px;
@@ -49,11 +49,36 @@
 .day-square-true{
     border: solid black;
     height: 100px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .completed-tasks{
     height: 100px;
+    
+}
 
+ul{
+    margin: 0px;
+    padding: 0px;
+}
+h5{
+    font-weight: bold;
+    padding-bottom: 20px ;
+}
+
+.task-item{
+    padding: 0px;
+    padding-top: 20px;
+    list-style: none;
+    text-align: center;
+    margin-bottom: 2px;
+}
+.dueGoal-item{
+    position: relative;
+    padding: 0px;
+    list-style: none;
+    text-align: center;
+    margin-bottom: 2px;
+    font-weight: bold;
 }
 .week-days-header{
     display: grid;
