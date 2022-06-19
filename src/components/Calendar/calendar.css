@@ -6,21 +6,58 @@
     padding: 20px;
     border-radius: 20px;
 }
+.sign-in-header {
+    justify-content: space-between;
+}
+
+.date-picker{
+    width: auto;
+    height: 25px;
+}
+
+.exit-btn{
+    margin-right: 100px;
+    cursor: pointer;
+}
+.exit-btn:active{
+    transform: scale(0.8);
+}
+
+.arrow-btn{
+    width:50px;
+    cursor: pointer;
+}
+
+#forward-btn:active{
+    transform: scale(0.8);
+}
+#back-btn:active{
+    transform: scale(-0.8);
+}
+.month-header {
+    display: flex;
+}
+
+.month-header h1{
+    margin: 0px 10px 10px 10px;
+}
+
 
 .calendar-days{
     display: grid;
     min-height: 600px;
-   
-    background: white;
-   
+    padding: 10px;
     grid-template-columns: repeat(7,1fr);
     grid-template-rows: repeat(6,1fr);
-    border: solid black;
+    column-gap: 2px;
+    row-gap: 2px;
+    border: none;
     /* grid-template-rows: repeat(7, 30px); */
 }
 
 .calendar{
     border: solid black;
+    background-color: skyblue;
     padding: 20px;
     border-radius: 20px;
     height: 700px;
@@ -29,7 +66,7 @@
 
 
 @media screen and (max-width: 920px){
-    .calendar-container{
+    /* .calendar-container{
         min-height: 100%;
         display: flex;
         justify-content: center;
@@ -42,12 +79,20 @@
         border-radius: 0px;
         margin: 0px;
     }
-   
+    */
 }
 
 
-.day-square-true{
+
+.day-square-true-false{
     border: solid black;
+    height: 100px;
+    overflow-y: auto;
+    background-color: white;
+}
+.day-square-true-true{
+    background-color: rgba(255, 255, 0, 0.505);
+    border: solid yellow;
     height: 100px;
     overflow-y: auto;
 }
@@ -84,4 +129,34 @@ h5{
     display: grid;
     text-align: center;
     grid-template-columns: repeat(7, 1fr);
+}
+.week-days-header p{
+    background-color: bisque;
+    font-weight: bold;
+    padding: 10px;
+    margin: 0px 2px 0px 2px;
+    border-radius: 5px;
+}
+
+
+#sunday {
+    background-color: rgba(255, 0, 0, 0.618);
+}
+#monday {
+    background-color: rgba(255, 166, 0, 0.597);
+}
+#tuesday {
+    background-color: rgba(255, 255, 0, 0.65);
+}
+#wednesday {
+    background-color: rgba(0, 128, 0, 0.498);
+}
+#thursday {
+    background-color: rgba(0, 0, 255, 0.519);
+}
+#friday {
+    background-color: rgba(76, 0, 130, 0.474);
+}
+#saturday {
+    background-color: rgba(238, 130, 238, 0.544);
 }

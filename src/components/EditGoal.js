@@ -98,6 +98,7 @@ const EditGoal = ({submitGoalEdits,toggleShowEditGoal,reOrderTaskUp,reOrderTaskD
                     <input autoFocus className="h3 edit-goal-title" placeholder={goal.title} value={goal.title} onChange={(event) => {editGoalTitle(event.target.value)}}></input>
                     <ReOrderButtons styling="goal-reorder" reOrderUp={() => {reOrderGoalUp(goal.id)}} reOrderDown={() => {reOrderGoalDown(goal.id)}} size="40px" />
                     <button onClick={() => {goal.showEditGoal=false;
+                    if(goal.tasks.length == 0){goal.color = goalColor; goal.title= goalTitle};
                         submitGoalEdits(oldGoal,goal)}} className="edit-done-btn" style={{backgroundColor:goal.color}}>{goal.tasks.length == 0 ? "Remove" : "Done"}</button>
                 </div>
     

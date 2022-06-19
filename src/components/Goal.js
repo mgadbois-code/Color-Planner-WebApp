@@ -21,6 +21,19 @@ const Goal = (props) => {
     // console.log(`From goal.js from ${props.goal.title}: undone tasks are ${undoneTasks} `)
     
     const [allTodayStatus, setAllTodayStatus] = useState(undoneTasks.filter(task => task.today).length > 0);
+    const displayDate = (date) => {
+        let dateArr = date.split('-')
+        if(dateArr[1][0] == 0){
+            dateArr[1] = dateArr[1][1]
+        
+        }
+        if(dateArr[2][0] == 0){
+            dateArr[2] = dateArr[2][1]
+        
+        }
+        let formattedDate = dateArr[1] + '/' + dateArr[2] + '/' + dateArr[0]
+        return formattedDate
+    }
     
     
     if(props.showEditGoal){
@@ -49,7 +62,7 @@ const Goal = (props) => {
 
             </div>
 
-            {props.goal.dueDate !=="" && <h6 style={{fontWeight:'bold'}} onClick={() => props.onToggle(props.goal.id)} className="detail">Due: {props.goal.dueDate} </h6>}
+            {props.goal.dueDate !=="" && <h6 style={{fontWeight:'bold'}} onClick={() => props.onToggle(props.goal.id)} className="detail">Due: {displayDate(props.goal.dueDate) } </h6>}
 
             <div className="flex" style={{overflow:"auto"}}>
                 {!props.goal.showSubGoals && props.goal.tasks.map((task) =>{

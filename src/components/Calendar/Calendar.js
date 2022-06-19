@@ -1,13 +1,17 @@
 import React from 'react'
 import './calendar.css'
+import {ReactComponent as Exit} from '../../exit.svg'
+import {ReactComponent as Forward} from '../../forward_arrow.svg'
+import {ReactComponent as Back} from '../../back_arrow.svg'
 
 import logo from '../../Color-Planner_Icon.png'
 import { useState } from 'react'
 
-const Calendar = ({date, completed, goals}) => {
+const Calendar = ({date, completed, goals, setShowCalendar}) => {
     var weekDay = date.getDay();
     var currMonth = date.getMonth()
     var currYear = date.getFullYear();
+    var currDate = date.getDate()
     const [year, setYear] = useState(currYear)
     const [month,setMonth] = useState(date.getMonth())
     var theDate = new Date(currYear, month,1)
@@ -60,13 +64,28 @@ const Calendar = ({date, completed, goals}) => {
             dayArr[dueGoals[i].dueDate.split('-')[2] -1].push(dueGoals[i])
 
           }
-          console.log(dayArr)
           return dayArr
     }
+
+    const [completedTasks, setCompletedTasks] = useState(getCompletedTasks(month, year))
+    const [dueGoals, setDueGoals] = useState(getDueGoals(month,year))
     
-        const [completedTasks, setCompletedTasks] = useState(getCompletedTasks(month, year))
-        const [dueGoals, setDueGoals] = useState(getDueGoals(month,year))
-        
+    const setDate = (dateStr) => {
+        let dateArr = dateStr.split('-');
+        if(dateArr[1][0] == 0){
+            dateArr[1] = dateArr[1][1]
+        }
+        if(dateArr[2][0] == 0){
+            dateArr[2] = dateArr[2][1]
+        }
+        setMonth(dateArr[1] -1)
+        setYear(dateArr[0])
+        theDate = new Date(dateArr[0], dateArr[1] -1,1)
+        setDayOffset(theDate.getDay()) 
+        setCompletedTasks(getCompletedTasks(dateArr[1]-1,dateArr[0]))
+        setDueGoals(getDueGoals(dateArr[1]-1,dateArr[0]))
+    }
+    
     
     
 
@@ -103,28 +122,33 @@ const Calendar = ({date, completed, goals}) => {
             }
         return
     }
+  
     return (
         <div className="calendar-container" onClick={(event) => event.stopPropagation()}>
             
                 <div className="sign-in-header">
-                    <button onClick={()=>{changeMonth(false)}}>back</button>
-                <h1>{`${monthsArr[month]} ${year}`}</h1>
-                    <button onClick={()=>{changeMonth(true)}}>forward</button>
+            <Exit className='exit-btn' onClick={()=>setShowCalendar(false)} />
+                    <div className='month-header'>
+                        <Back className='arrow-btn' id='back-btn' onClick={()=>{changeMonth(false)}}/>
+                            <h1>{`${monthsArr[month]} ${year}`}</h1>
+                        <Forward className='arrow-btn' id='forward-btn' onClick={()=>{changeMonth(true)}}/>
+                    </div>
                 {/* <img src={logo} alt="" /> */}
+                <input type="date" className='date-picker' onChange={(event => setDate(event.target.value))} />
                 </div>
                 <div className="calendar">
                 <div className="week-days-header">
-                    <p>Sunday</p>
-                    <p>Monday</p>
-                    <p>Tuesday</p>
-                    <p>Wednesday</p>
-                    <p>Thursday</p>
-                    <p>Friday</p>
-                    <p>Saturday</p>
+                    <p id='sunday'>Sunday</p>
+                    <p id='monday'>Monday</p>
+                    <p id='tuesday'>Tuesday</p>
+                    <p id='wednesday'>Wednesday</p>
+                    <p id='thursday'>Thursday</p>
+                    <p id='friday'>Friday</p>
+                    <p id='saturday'>Saturday</p>
                 </div>
                 <div className="calendar-days">
                    {arr.map((monthDay) =>{
-                    return <div className={`day-square-${(monthDay+1 - dayOffset) > 0 && (monthDay+1 - dayOffset) <= monthDayNumberArr[month]}`}>
+                    return <div className={`day-square-${(monthDay+1 - dayOffset) > 0 && (monthDay+1 - dayOffset) <= monthDayNumberArr[month]}-${(monthDay+1 - dayOffset) == currDate && month == currMonth && currYear == year}`} >
                         
                         
                         <div>{(monthDay+1 - dayOffset) > 0 && (monthDay+1 - dayOffset) <= monthDayNumberArr[month] ?

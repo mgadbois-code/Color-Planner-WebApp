@@ -11,6 +11,8 @@ body {
 
 }
 #calendar-btn {
+  cursor: pointer;
+  width:75px;
   border: none;
   background: none;
   position: absolute;

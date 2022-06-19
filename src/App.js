@@ -5,6 +5,7 @@ import React from "react"
 import LoginPage from "./components/Login/LoginPage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
+import calendarIcon from './calendar_icon.png'
 import Header from "./components/Header";
 import AddTask from "./components/AddTask";
 import TaskList from "./components/TaskList";
@@ -771,14 +772,14 @@ const toggleVisible = async (goalId) => {
       </div>}
       {showCalendar && !showLogin &&
       <div className="sign-in-window" onClick={() => setShowCalendar(false)}>
-          <Calendar date= {date} completed={completed} goals={goals}/>   
+          <Calendar date= {date} completed={completed} goals={goals} setShowCalendar={setShowCalendar}/>   
       </div>}
       <div className="heading">
           {!user && !showLogin && 
           <div className="offline-warning" >
             <h5 className="warning">⚠️You are not signed in.⚠️<p>Sign in to create and save goals!</p></h5>
           </div>}
-          <button id="calendar-btn" onClick={() => setShowCalendar(true)}>📅</button>
+          <img src={calendarIcon} id="calendar-btn" onClick={() => setShowCalendar(true)}/>
           {user ? <button id='sign-in-btn' onClick={() => {logout(); setGoals([]); setCompleted([]); setShowLogin(true) }}>Sign Out</button> :
           <button id='sign-in-btn' onClick={() => setShowLogin(true)}>Sign in</button>}
       </div>
