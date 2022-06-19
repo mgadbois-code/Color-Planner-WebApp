@@ -153,7 +153,7 @@ const Calendar = ({date, completed, goals, setShowCalendar}) => {
                         
                         <div>{(monthDay+1 - dayOffset) > 0 && (monthDay+1 - dayOffset) <= monthDayNumberArr[month] ?
                             <div>
-                                <h5 style={{position:'fixed'}}>{(monthDay+1 - dayOffset)}</h5>
+                                <h5 style={{position:'absolute'}}>{(monthDay+1 - dayOffset)}</h5>
                                {dueGoals[monthDay - dayOffset].length > 0 &&  
                                <div className="due-goal">
                                     <ul>

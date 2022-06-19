@@ -65,23 +65,6 @@
 }
 
 
-@media screen and (max-width: 920px){
-    /* .calendar-container{
-        min-height: 100%;
-        display: flex;
-        justify-content: center;
-               
-    }
-    .calendar-days{
-        min-width: 460px;
-        padding: 20px 0px 0px 0px;
-
-        border-radius: 0px;
-        margin: 0px;
-    }
-    */
-}
-
 
 
 .day-square-true-false{
@@ -160,3 +143,42 @@ h5{
 #saturday {
     background-color: rgba(238, 130, 238, 0.544);
 }
+
+@media screen and (max-width: 920px){
+    .week-days-header{
+        margin: 5px;
+    }
+    .date-picker{
+        margin: 7px;
+    }
+    .exit-btn{
+        margin: 7px;
+    }
+    h5{
+        font-size: 15px;
+    }
+    h1{
+        font-size: 25px;
+    }
+    .arrow-btn{
+        width: 35px;
+    }
+
+    p{
+        font-size: 10px;
+        padding: 0px;
+    }
+    .calendar-container{
+        padding: 0px;
+    }
+    .calendar{
+        margin: 0px;
+        padding: 0px;
+    }
+    .calendar-days{
+        margin: 0px;
+        column-gap: 0px;
+        row-gap: 0px;
+    }
+}
+

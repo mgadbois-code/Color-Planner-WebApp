@@ -30,15 +30,15 @@ const Completed = ({goal, removeGoal,onToggle,reOrderCompletedUp,reOrderComplete
     
     
     return (
-        <div className="item pointer" style={{border:"solid 6px", borderColor: goal.color, overflow:"auto",background:`${goal.color}`} } onClick={() => onToggle(goal.id) } >
+        <div className="item pointer" style={{border:"solid 6px", borderColor: goal.color, overflow:"auto",background:`${goal.color}`} } onClick={() => onToggle() } >
             
             <div className="header" style={{marginTop:"-5px"}}>
                <div className="flex">
-                    <h3 className="detail flex" style={{marginRight:"20px", fontWeight:'550'}}  onClick={() => onToggle(goal.id)}>{goal.title}</h3>
-                    <ReOrderButtons styling="completed-reorder" reOrderUp={(event) => {reOrderCompletedUp(goal.id);}} reOrderDown={(event) => {reOrderCompletedDown(goal.id)}} />
+                    <h3 className="detail flex" style={{marginRight:"20px", fontWeight:'550'}}  onClick={() => onToggle()}>{goal.title}</h3>
+                    <ReOrderButtons styling="completed-reorder" reOrderUp={(event) => {reOrderCompletedUp();}} reOrderDown={(event) => {reOrderCompletedDown()}} />
                 </div>
                 <div className="header">
-                    <TrashIcon style={{width:'40px', height:'auto', margin:'10px'}} onClick={(event) => {event.stopPropagation(); removeGoal(goal.id)}} />
+                    <TrashIcon className='trash-bin' onClick={(event) => {event.stopPropagation(); removeGoal()}} />
                 </div>
 
             </div>

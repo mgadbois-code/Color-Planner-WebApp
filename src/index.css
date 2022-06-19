@@ -226,6 +226,16 @@ body {
   justify-self: center; */
 }
 
+.trash-bin{
+  width:40px;
+   height:auto;
+    margin:10px;
+
+}
+.trash-bin:active{
+ transform: scale(0.8);
+}
+
 .completed-btn {
   margin-right:5px; 
   color: black;

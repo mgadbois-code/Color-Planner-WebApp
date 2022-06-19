@@ -160,16 +160,20 @@ const toggleSubGoals = async (id) => {
   }))
   
   await updateGoalDB(newGoal,newGoal)
+
 }
 
 const toggleSubCompleted = (id) => {
-  setCompleted(completed.map((goal) => {
+  let newCompleted = completed.map((goal) => {
     if(goal.id == id){
       let newGoal = {...goal, showSubGoals: !goal.showSubGoals}
       return newGoal
     }
     return goal
-  }))
+  })
+
+  setCompleted(newCompleted)
+  return newCompleted
 }
 
 const toggleEditGoal = async (id) => {
@@ -254,6 +258,7 @@ const removeCompleted = async (goalId) => {
       newCompleted[i].id = newCompleted.length - i
     }
   setCompleted(newCompleted)
+  return newCompleted
   // updCompletedDB(newCompleted)
 }
 
@@ -651,6 +656,7 @@ const reOrderCompletedUp = async (goalId) => {
     await changeCompletedIdDB(movingGoalDB, tempId)
     tempGoalDB.id = 0;
     await changeCompletedIdDB(tempGoalDB, movingGoalId)
+    return completedArr
 // updCompletedDB(completedArr)
 
 }
@@ -685,6 +691,7 @@ await changeCompletedIdDB(tempGoalDB, 0)
 await changeCompletedIdDB(movingGoalDB, tempId)
 tempGoalDB.id = 0;
 await changeCompletedIdDB(tempGoalDB, movingGoalId)
+return completedArr
 // updCompletedDB(completedArr)
 
 }
@@ -797,7 +804,7 @@ const toggleVisible = async (goalId) => {
         : showHiddenList ? <h1 style={{display:"flex", justifyContent:"space-around"}}>Hidden Goals</h1> 
         : <Header titleName="Goals"  buttonColor="green" buttonText="Add"title="Goals" onAdd={() => createNewGoal()}/>}
           {showCompleted ? 
-          <CompletedList completed={completed} submitGoalEdits={submitGoalEdits}
+          <CompletedList completed={completed} submitGoalEdits={submitGoalEdits} date={date}
             reOrderCompletedUp={reOrderCompletedUp} reOrderCompletedDown={reOrderCompletedDown} removeGoal={removeCompleted} onToggle ={toggleSubCompleted}/> 
             : 
             showHiddenList ? <HiddenList goals={goals} toggleVisible={toggleVisible} onToggle ={toggleSubGoals} toggleDone={toggleDone} removeGoal={removeGoal}/>
